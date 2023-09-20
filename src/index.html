@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="layout">
+        <section class="layout-wrapper">
+          <h1>Вход</h1>
+          <form>
+            <div>
+              <label>Логин</label>
+              <input />
+            </div>
+            <div>
+              <label>Пароль</label>
+              <input />
+            </div>
+          </form>
+          {{> button-base text="Поменять"}}
+        </section>
+      </div>
+    </div>
+    <script type="module" src="pages/home/main.js"></script>
+  </body>
+</html>
