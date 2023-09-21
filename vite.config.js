@@ -6,7 +6,7 @@ const root = resolve(__dirname, "src");
 const outDir = resolve(__dirname, "dist");
 const partialDirectory = [
   resolve(root, "components"),
-  resolve(root, "pages", "home", "components"),
+  resolve(root, "pages", "login", "components"),
 ];
 
 export default defineConfig({
@@ -22,7 +22,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        login: resolve(root, "pages", "login", "index.html"),
+        register: resolve(root, "pages", "register", "index.html"),
       },
     },
   },

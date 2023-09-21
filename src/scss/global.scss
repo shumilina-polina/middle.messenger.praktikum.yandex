@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
 body {
+  overflow-x: hidden;
   --color-text: rgb(30, 30, 30);
   --color-gray: rgb(153, 153, 153);
   --color-blue: rgba(51, 105, 243, 1);
@@ -14,5 +15,28 @@ body {
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
-  line-height: 13px;
+  line-height: 100%;
+}
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &-wrapper {
+    margin: 0 auto;
+    height: 80%;
+    width: 60%;
+    max-width: 340px;
+    max-height: 450px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.14);
+    padding: 50px 30px 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

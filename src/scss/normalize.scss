@@ -147,6 +147,7 @@ q:before {
 input,
 input:required {
   box-shadow: none;
+  border: none;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:active,
@@ -263,6 +264,7 @@ pre {
 }
 a {
   background-color: transparent;
+  text-decoration: none;
 }
 abbr[title] {
   border-bottom: none;

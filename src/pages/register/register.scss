@@ -1,0 +1,16 @@
+.form-register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.layout__register {
+  height: auto;
+  padding: 5vw 0;
+}
+.layout-wrapper__register {
+  max-height: none;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+{{> head title='Мессенджер - Регистрация'}}
+
+<body>
+  <div class="layout layout__register">
+    <section class="layout-wrapper layout-wrapper__register">
+      {{> layout-title text='Регистрация'}}
+      <form class="form form-register">
+        {{> input-wrapper label='Почта' input-id='register-email' input='
+          <input
+            class="input"
+            id="register-email"
+            type="email"
+            name="email"
+            placeholder="Почта"
+            required
+            minlength="1"
+            maxlength="40"
+          />
+          '}} {{> input-wrapper label='Логин' input-id='register-login' input='
+          <input
+            class="input"
+            id="register-login"
+            type="text"
+            name="login"
+            placeholder="Логин"
+            required
+            minlength="2"
+            maxlength="40"
+            pattern="^[А-Яа-яЁёA-Za-z\s\-]+$"
+          />
+          '}} {{> input-wrapper label='Имя' input-id='register-first-name' input='
+          <input
+            class="input"
+            id="register-first-name"
+            type="text"
+            name="first_name"
+            placeholder="Имя"
+            required
+            minlength="1"
+            maxlength="30"
+          />
+          '}} {{> input-wrapper label='Фамилия' input-id='register-second-name' input='
+          <input
+            class="input"
+            id="register-second-name"
+            type="text"
+            name="second_name"
+            placeholder="Фамилия"
+            required
+            minlength="1"
+            maxlength="30"
+          />
+          '}} {{> input-wrapper label='Телефон' input-id='register-phone' input='
+          <input
+            class="input"
+            id="register-phone"
+            type="phone"
+            name="phone"
+            placeholder="Телефон"
+            required
+            minlength="11"
+            maxlength="11"
+          />
+          '}} {{> input-wrapper label='Пароль' input-id='register-password' input='
+            <input
+                  class="input"
+                  id="register-password"
+                  type="password"
+                  name="password"
+                  placeholder="Пароль"
+                  required
+                  minlength="6"
+                  maxlength="30"
+                    />
+                    '}}
+
+        {{> input-wrapper label='Пароль (ещё раз)' input-id='register-password-double' input='
+          <input
+                  class="input"
+                  id="register-password-double"
+                  type="password"
+                  name="password"
+                  placeholder="Пароль (ещё раз)"
+                  required
+                  minlength="6"
+                  maxlength="30"
+                    />
+                    '}}
+
+        {{> button-base type="submit" text='Создать аккаунт'}}
+      </form>
+      {{> link-to-form text='Войти' url='/'}}
+    </section>
+  </div>
+  <script type="module" src="./register.js"></script>
+</body>
+
+</html>
