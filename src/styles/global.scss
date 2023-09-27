@@ -16,4 +16,22 @@ body {
   font-style: normal;
   font-weight: 600;
   line-height: 100%;
+  overflow: hidden;
+}
+
+* {
+  &::selection {
+    background-color: #fff;
+    color: #3369f3;
+  }
+  scrollbar-color: #3369f3 transparent;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background: #c4c4c4;
+  }
 }
