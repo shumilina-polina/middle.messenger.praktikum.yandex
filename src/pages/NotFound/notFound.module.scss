@@ -1,0 +1,20 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.text {
+  color: #1e1e1e;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+}

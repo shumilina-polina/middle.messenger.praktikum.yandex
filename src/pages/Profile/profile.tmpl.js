@@ -38,12 +38,12 @@ export const tmpl = `
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
   s.links_item__link_data
-}" href="/profile-change">Изменить данные</a>
+}" href="/profile-change-data">Изменить данные</a>
             </li>
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
   s.links_item__link_password
-}" href="/password-change">Изменить пароль</a>
+}" href="/profile-change-password">Изменить пароль</a>
             </li>
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
@@ -66,6 +66,42 @@ export const tmplProfileChange = `
           {{{avatar}}}
         </header>
         ${main()}
+        <footer>
+          <a href="/profile">
+            {{{saveButton}}}
+          </a>
+        </footer>
+      </section>
+    </main>
+`;
+
+export const tmplPasswordChange = `
+    <main class="${s.layout}">
+      <div class="${s.prev}">
+        <a href="/chat" class="${s.prev_link}"></a>
+      </div>
+      <section class="${s.profile}">
+        <header class="${s.profile_header}">
+          {{{avatar}}}
+        </header>
+        <main>
+          <ul>
+          {{#each passwordInputs}}
+            <li class="${s.profile_item}">
+                <label class="${s.profile_item__label}" for="{{inputId}}">
+                    {{label}}
+                </label>
+                <input
+                    class="${s.profile_item__input}"
+                    type="password"
+                    id="{{inputId}}"
+                    name="{{inputName}}"
+                    placeholder="{{placeholder}}"
+                />
+            </li>
+          {{/each}}
+          </ul>
+        </main>
         <footer>
           <a href="/profile">
             {{{saveButton}}}

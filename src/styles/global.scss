@@ -21,7 +21,7 @@ body {
 
 * {
   &::selection {
-    background-color: #fff;
+    background-color: #dcdbdb;
     color: #3369f3;
   }
   scrollbar-color: #3369f3 transparent;
@@ -34,4 +34,14 @@ body {
     border-radius: 30px;
     background: #c4c4c4;
   }
+}
+
+.popup {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.popup-open {
+  opacity: 1;
+  pointer-events: all;
 }

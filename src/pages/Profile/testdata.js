@@ -42,3 +42,24 @@ export const data = [
     placeholder: '+7 (909) 967-30-30',
   },
 ];
+
+export const passwordInputs = [
+  {
+    inputId: 'profile-password-old',
+    inputName: 'oldPassword',
+    label: 'Старый пароль',
+    placeholder: '',
+  },
+  {
+    inputId: 'profile-password-new',
+    inputName: 'newPassword',
+    label: 'Новый пароль',
+    placeholder: '',
+  },
+  {
+    inputId: 'profile-password-new-double',
+    inputName: 'newPassword',
+    label: 'Повторите новый пароль',
+    placeholder: '',
+  },
+];
