@@ -10,13 +10,13 @@ import {
 } from '/src/pages/Profile';
 
 const ROUTES = {
-  '/server-error': ServerError(),
-  '/not-found': NotFound(),
-  '/profile-change-password': ProfileChangePassword(),
-  '/profile-change-data': ProfileChangeData(),
-  '/profile': Profile(),
-  '/chat': Chat(),
-  '/register': Register(),
+  '/server-error/': ServerError(),
+  '/not-found/': NotFound(),
+  '/profile-change-password/': ProfileChangePassword(),
+  '/profile-change-data/': ProfileChangeData(),
+  '/profile/': Profile(),
+  '/chat/': Chat(),
+  '/register/': Register(),
   '/': Login(),
 };
 

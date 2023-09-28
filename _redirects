@@ -1,0 +1,9 @@
+# Redirects from what the browser requests to what we serve
+
+/chat /
+/register /
+/profile /
+/profile-change-data /
+/profile-change-password /
+/not-found /
+/server-error /
