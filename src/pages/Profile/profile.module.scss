@@ -1,0 +1,106 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: minmax(5vw, 64px) 1fr;
+}
+.prev {
+  background-color: #fbfbfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #eaeaea;
+  &_link {
+    border-radius: 100%;
+    background-color: #3369f3;
+    background-image: url('/src/assets/arrow-prev.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 50%;
+    aspect-ratio: 1/1;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #234cb3;
+    }
+    &:active {
+      background-color: #3369f3c2;
+    }
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  justify-self: center;
+  flex-direction: column;
+  gap: 60px;
+  width: 50%;
+  &_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 21px;
+    &__name {
+      color: #1e1e1e;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  &_item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    &:last-child {
+      border-bottom: none;
+    }
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    font-size: 13px;
+    font-weight: 500;
+    &__label {
+      color: #1e1e1e;
+    }
+    &__input {
+      text-overflow: ellipsis;
+      justify-self: end;
+      text-align: right;
+      color: #999;
+      width: 80%;
+      &:disabled {
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+.links {
+  &_item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    &:last-child {
+      border-bottom: none;
+    }
+    &__link {
+      color: #3369f3;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+      &:hover {
+        opacity: 0.7;
+        text-decoration: underline;
+      }
+      &_logout {
+        color: #f00;
+      }
+    }
+  }
+}
+
+.form_change__data, .form_change__password {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
