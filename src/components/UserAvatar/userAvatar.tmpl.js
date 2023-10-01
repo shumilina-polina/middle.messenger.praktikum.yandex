@@ -10,11 +10,13 @@ export const tmpl = `
   <div class="${s.popup} popup popup-avatar">
     <div class="${s.popup_wrapper}">
         <h3 class="${s.popup_title}">Загрузите файл</h3>
-        <label class="${s.popup_file}">
-            <input class="${s.popup_file__input}" type="file" name="avatar" id="input-avatar-file" />
-            Bыбрать файл на компьютере
-        </label>
-        {{{changeButton}}}
+        <form>
+          <label class="${s.popup_file}">
+              <input class="${s.popup_file__input}" type="file" name="avatar" id="input-avatar-file" />
+              Bыбрать файл на компьютере
+          </label>
+          {{{changeButton}}}
+        </form>
     </div>
   </div>
 `;

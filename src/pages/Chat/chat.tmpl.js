@@ -6,7 +6,9 @@ export const tmpl = `
     <section class="${s.dialogues}">
         <header class="${s.nav}">
             <a class="${s.nav_link}" href="${PAGES_ROUTES.profile}">Профиль ></a>
-            <input class="${s.nav_search} type="search" placeholder="Поиск" id="dialogues-search" name="search" />
+            <form>
+                <input class="${s.nav_search} type="search" placeholder="Поиск" id="dialogues-search" name="search" />
+            </form>
         </header>
         <main>
             <ul class="${s.chatfeed_list}">
@@ -31,7 +33,9 @@ export const tmpl = `
     <section class="${s.feed}">
         <main>Выберите чат, чтобы отправить сообщение</main>
         <footer>
-            <input class="${s.feed_text} type="text" placeholder="Сообщение" id="feed-text" name="message" />
+            <form>
+                <input class="${s.feed_text} type="text" placeholder="Сообщение" id="feed-text" name="message" />
+            </form>
         </footer>
     </section>
 </main>
