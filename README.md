@@ -22,7 +22,6 @@
 - [/profile-change-data](https://lively-dieffenbachia-64cec5.netlify.app/profile-change-data) - страница изменений данных пользователя
 - [/profile-change-password](https://lively-dieffenbachia-64cec5.netlify.app/profile-change-password) - страница изменений данных пользователя
 - [/not-found](https://lively-dieffenbachia-64cec5.netlify.app/not-found) - страница 404
-- [/server-error](https://lively-dieffenbachia-64cec5.netlify.app/not-found) - страница 5**
+- [/server-error](https://lively-dieffenbachia-64cec5.netlify.app/not-found) - страница 5\*\*
 
 ### Автор - [Полина Шумилина](https://t.me/shumpolinaa)
-
