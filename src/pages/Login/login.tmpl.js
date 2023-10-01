@@ -1,3 +1,4 @@
+import { PAGES_ROUTES } from '/src/constants/pages_routes';
 import s from './login.module.scss';
 
 export const tmpl = `
@@ -7,7 +8,7 @@ export const tmpl = `
         <form class="${s.form_login} form form-login">
             {{{inputLogin}}}
             {{{inputPassword}}}
-            <a href="/chat">
+            <a href="${PAGES_ROUTES.chat}">
                 {{{loginButton}}}
             </a>
         </form>

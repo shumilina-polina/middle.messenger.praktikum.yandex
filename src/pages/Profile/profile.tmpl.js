@@ -1,3 +1,4 @@
+import { PAGES_ROUTES } from '/src/constants/pages_routes';
 import s from './profile.module.scss';
 
 const main = (disabled = false) => `
@@ -25,7 +26,7 @@ const main = (disabled = false) => `
 export const tmpl = `
     <main class="${s.layout}">
       <div class="${s.prev}">
-        <a href="/chat" class="${s.prev_link}"></a>
+        <a href="${PAGES_ROUTES.chat}" class="${s.prev_link}"></a>
       </div>
       <section class="${s.profile}">
         <header class="${s.profile_header}">
@@ -38,17 +39,17 @@ export const tmpl = `
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
   s.links_item__link_data
-}" href="/profile-change-data">Изменить данные</a>
+}" href="${PAGES_ROUTES.profileChangeData}">Изменить данные</a>
             </li>
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
   s.links_item__link_password
-}" href="/profile-change-password">Изменить пароль</a>
+}" href="${PAGES_ROUTES.profileChangePassword}">Изменить пароль</a>
             </li>
             <li class="${s.links_item}">
               <a class="${s.links_item__link} ${
   s.links_item__link_logout
-}" href="/">Выйти</a>
+}" href="${PAGES_ROUTES.login}">Выйти</a>
             </li>
           </ul>
         </footer>
@@ -59,7 +60,7 @@ export const tmpl = `
 export const tmplProfileChange = `
     <main class="${s.layout}">
       <div class="${s.prev}">
-        <a href="/chat" class="${s.prev_link}"></a>
+        <a href="${PAGES_ROUTES.chat}" class="${s.prev_link}"></a>
       </div>
       <section class="${s.profile}">
         <header class="${s.profile_header}">
@@ -67,7 +68,7 @@ export const tmplProfileChange = `
         </header>
         ${main()}
         <footer>
-          <a href="/profile">
+          <a href="${PAGES_ROUTES.profile}">
             {{{saveButton}}}
           </a>
         </footer>
@@ -78,7 +79,7 @@ export const tmplProfileChange = `
 export const tmplPasswordChange = `
     <main class="${s.layout}">
       <div class="${s.prev}">
-        <a href="/chat" class="${s.prev_link}"></a>
+        <a href="${PAGES_ROUTES.chat}" class="${s.prev_link}"></a>
       </div>
       <section class="${s.profile}">
         <header class="${s.profile_header}">
@@ -103,7 +104,7 @@ export const tmplPasswordChange = `
           </ul>
         </main>
         <footer>
-          <a href="/profile">
+          <a href="${PAGES_ROUTES.profile}">
             {{{saveButton}}}
           </a>
         </footer>
