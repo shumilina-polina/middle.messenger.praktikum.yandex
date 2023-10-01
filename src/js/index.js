@@ -10,13 +10,13 @@ import {
 } from '/src/pages/Profile';
 
 const ROUTES = {
-  '/server-error/': ServerError(),
-  '/not-found/': NotFound(),
-  '/profile-change-password/': ProfileChangePassword(),
-  '/profile-change-data/': ProfileChangeData(),
-  '/profile/': Profile(),
-  '/chat/': Chat(),
-  '/register/': Register(),
+  '/server-error': ServerError(),
+  '/not-found': NotFound(),
+  '/profile-change-password': ProfileChangePassword(),
+  '/profile-change-data': ProfileChangeData(),
+  '/profile': Profile(),
+  '/chat': Chat(),
+  '/register': Register(),
   '/': Login(),
 };
 
@@ -24,7 +24,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('app');
 
   if (root) {
-    const component = ROUTES[window.location.pathname] || NotFound();
+    const component =
+      ROUTES[window.location.pathname] ||
+      ROUTES[window.location.pathname.slice(0, -1)] ||
+      NotFound();
     root.innerHTML = component;
   }
 });
