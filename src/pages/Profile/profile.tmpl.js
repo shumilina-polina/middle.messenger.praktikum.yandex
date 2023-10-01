@@ -1,25 +1,34 @@
 import { PAGES_ROUTES } from '/src/constants/pages_routes';
 import s from './profile.module.scss';
 
-const main = (disabled = false) => `
+const saveButton = `
+  <a href="${PAGES_ROUTES.profile}">
+    {{{saveButton}}}
+  </a>
+`;
+
+const main = (disabled = false, hasButton = false) => `
 <main>
-    <ul>
-    {{#each data}}
-    <li class="${s.profile_item}">
-        <label class="${s.profile_item__label}" for="{{inputId}}">
-            {{label}}
-        </label>
-        <input
-            class="${s.profile_item__input}"
-            type="{{inputType}}"
-            id="{{inputId}}"
-            name="{{inputName}}"
-            placeholder="{{placeholder}}"
-            ${disabled ? 'disabled' : ''}
-        />
-    </li>
-    {{/each}}
-    </ul>
+    <form class="${s.form_change__data}">
+      <ul>
+        {{#each data}}
+          <li class="${s.profile_item}">
+              <label class="${s.profile_item__label}" for="{{inputId}}">
+                  {{label}}
+              </label>
+              <input
+                  class="${s.profile_item__input}"
+                  type="{{inputType}}"
+                  id="{{inputId}}"
+                  name="{{inputName}}"
+                  placeholder="{{placeholder}}"
+                  ${disabled ? 'disabled' : ''}
+              />
+          </li>
+        {{/each}}
+      </ul>
+      ${hasButton ? saveButton : ''}
+    </form>
 </main>
 `;
 
@@ -66,12 +75,7 @@ export const tmplProfileChange = `
         <header class="${s.profile_header}">
           {{{avatar}}}
         </header>
-        ${main()}
-        <footer>
-          <a href="${PAGES_ROUTES.profile}">
-            {{{saveButton}}}
-          </a>
-        </footer>
+        ${main(false, true)}
       </section>
     </main>
 `;
@@ -86,28 +90,26 @@ export const tmplPasswordChange = `
           {{{avatar}}}
         </header>
         <main>
-          <ul>
-          {{#each passwordInputs}}
-            <li class="${s.profile_item}">
-                <label class="${s.profile_item__label}" for="{{inputId}}">
-                    {{label}}
-                </label>
-                <input
-                    class="${s.profile_item__input}"
-                    type="password"
-                    id="{{inputId}}"
-                    name="{{inputName}}"
-                    placeholder="{{placeholder}}"
-                />
-            </li>
-          {{/each}}
-          </ul>
+        <form class="${s.form_change__password}">
+            <ul>
+              {{#each passwordInputs}}
+                <li class="${s.profile_item}">
+                    <label class="${s.profile_item__label}" for="{{inputId}}">
+                        {{label}}
+                    </label>
+                    <input
+                        class="${s.profile_item__input}"
+                        type="password"
+                        id="{{inputId}}"
+                        name="{{inputName}}"
+                        placeholder="{{placeholder}}"
+                    />
+                </li>
+              {{/each}}
+            </ul>
+            ${saveButton}
+          </form>
         </main>
-        <footer>
-          <a href="${PAGES_ROUTES.profile}">
-            {{{saveButton}}}
-          </a>
-        </footer>
       </section>
     </main>
 `;

@@ -69,7 +69,7 @@
       text-align: right;
       color: #999;
       width: 80%;
-      &:disabled{
+      &:disabled {
         background-color: inherit;
       }
     }
@@ -97,4 +97,10 @@
       }
     }
   }
+}
+
+.form_change__data, .form_change__password {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
 }
