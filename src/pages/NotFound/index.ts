@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { tmplNotFound, tmplServerError } from './notFound.tmpl';
-import { LayoutTitle } from '/src/components/LayoutTitle';
-import { LinkForm } from '/src/components/LinkForm';
+import { LayoutTitle } from '@/components/LayoutTitle';
+import { LinkForm } from '@/components/LinkForm';
 
 export const NotFound = () => {
   return Handlebars.compile(tmplNotFound)({

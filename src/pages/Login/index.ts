@@ -1,9 +1,9 @@
 import Handlebars from 'handlebars';
 import { tmpl } from './login.tmpl';
-import { LayoutTitle } from '/src/components/LayoutTitle';
-import { InputWrapper } from '/src/components/InputWrapper';
-import { BaseButton } from '/src/components/BaseButton';
-import { LinkForm } from '/src/components/LinkForm';
+import { LayoutTitle } from '@/components/LayoutTitle';
+import { InputWrapper } from '@/components/InputWrapper';
+import { BaseButton } from '@/components/BaseButton';
+import { LinkForm } from '@/components/LinkForm';
 
 export const Login = () => {
   return Handlebars.compile(tmpl)({

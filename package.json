@@ -9,6 +9,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite build && node server.js"

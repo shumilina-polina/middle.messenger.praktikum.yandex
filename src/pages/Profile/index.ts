@@ -1,11 +1,8 @@
 import Handlebars from 'handlebars';
 import { tmpl, tmplPasswordChange, tmplProfileChange } from './profile.tmpl';
-import { BaseButton } from '/src/components/BaseButton';
-import { UserAvatar } from '/src/components/UserAvatar';
-import { data, passwordInputs } from './testdata.js';
-const ha = (e) => {
-  console.log(e);
-};
+import { BaseButton } from '@/components/BaseButton';
+import { data, passwordInputs } from './testdata';
+import { UserAvatar } from '@/components/UserAvatar';
 
 const avatarOptions = UserAvatar({
   imageUrl:

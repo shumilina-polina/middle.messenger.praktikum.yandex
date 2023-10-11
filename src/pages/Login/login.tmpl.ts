@@ -1,4 +1,4 @@
-import { PAGES_ROUTES } from '/src/constants/pages_routes';
+import { PAGES_ROUTES } from '@/constants/pages_routes';
 import s from './login.module.scss';
 
 export const tmpl = `

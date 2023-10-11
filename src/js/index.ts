@@ -1,13 +1,13 @@
-import '/src/styles/share-styles.scss';
-import { Chat } from '/src/pages/Chat';
-import { Login } from '/src/pages/Login';
-import { Register } from '/src/pages/Register';
-import { NotFound, ServerError } from '/src/pages/NotFound';
+import '../styles/share-styles.scss';
+import { Chat } from '@/pages/Chat';
+import { Login } from '@/pages/Login';
+import { Register } from '@/pages/Register';
+import { NotFound, ServerError } from '@/pages/NotFound';
 import {
   Profile,
   ProfileChangeData,
   ProfileChangePassword,
-} from '/src/pages/Profile';
+} from '@/pages/Profile';
 
 const ROUTES = {
   '/server-error': ServerError(),
