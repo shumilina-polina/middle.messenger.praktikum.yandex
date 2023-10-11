@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "at-rule-no-unknown": null,
+    "color-hex-case": "lower"
+  },
+  "ignoreFiles": ["dist/*"]
+}

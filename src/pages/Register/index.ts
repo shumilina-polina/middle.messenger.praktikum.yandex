@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars';
 import { tmpl } from './register.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
 import { InputWrapper } from '@/components/InputWrapper';

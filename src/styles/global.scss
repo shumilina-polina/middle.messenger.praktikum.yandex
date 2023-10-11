@@ -2,16 +2,17 @@
 
 body {
   overflow-x: hidden;
-  --color-text: rgb(30, 30, 30);
-  --color-gray: rgb(153, 153, 153);
-  --color-blue: rgba(51, 105, 243, 1);
-  --color-blue-hover: rgba(51, 105, 243, 0.8);
-  --color-blue-active: rgba(51, 105, 243, 0.6);
-  --color-blue-light: rgb(228, 237, 253);
 
-  background-color: #ffffff;
+  --color-text: rgb(30 30 30);
+  --color-gray: rgb(153 153 153);
+  --color-blue: rgb(51 105 243 / 100%);
+  --color-blue-hover: rgb(51 105 243 / 80%);
+  --color-blue-active: rgb(51 105 243 / 60%);
+  --color-blue-light: rgb(228 237 253);
+
+  background-color: #fff;
   color: var(--color-text);
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
@@ -24,12 +25,15 @@ body {
     background-color: #dcdbdb;
     color: #3369f3;
   }
+
   scrollbar-color: #3369f3 transparent;
   scrollbar-width: thin;
+
   &::-webkit-scrollbar {
     background: transparent;
     width: 5px;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 30px;
     background: #c4c4c4;
@@ -41,6 +45,7 @@ body {
   pointer-events: none;
   transition: opacity 0.3s;
 }
+
 .popup-open {
   opacity: 1;
   pointer-events: all;
