@@ -1,4 +1,12 @@
-export const chats = [
+export type Chat = {
+  imageUrl: string;
+  userName: string;
+  message: string;
+  time: string;
+  count: number;
+};
+
+export const chats: Array<Chat> = [
   {
     imageUrl:
       'https://s.mediasole.ru/cache/content/data/images/2061/2061700/original.jpg',

@@ -9,7 +9,7 @@ import {
   ProfileChangePassword,
 } from '@/pages/Profile';
 
-const ROUTES = {
+const ROUTES: Record<string, string> = {
   '/server-error': ServerError(),
   '/not-found': NotFound(),
   '/profile-change-password': ProfileChangePassword(),

@@ -4,6 +4,7 @@ import { LayoutTitle } from '@/components/LayoutTitle';
 import { InputWrapper } from '@/components/InputWrapper';
 import { BaseButton } from '@/components/BaseButton';
 import { LinkForm } from '@/components/LinkForm';
+import { PAGES_ROUTES } from '@/types/routes';
 
 export const Login = () => {
   return Handlebars.compile(tmpl)({
@@ -29,6 +30,6 @@ export const Login = () => {
       pattern: '.{1,}',
     }),
     loginButton: BaseButton({ text: 'Войти', type: 'button' }),
-    noAccountLink: LinkForm({ text: 'Нет аккаунта?', url: '/register' }),
+    noAccountLink: LinkForm({ text: 'Нет аккаунта?', url: PAGES_ROUTES.register }),
   });
 };

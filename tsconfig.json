@@ -14,11 +14,11 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "sourceMap": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "paths": {
-      "@*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]

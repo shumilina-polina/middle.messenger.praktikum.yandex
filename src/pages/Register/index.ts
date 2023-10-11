@@ -4,6 +4,7 @@ import { LayoutTitle } from '@/components/LayoutTitle';
 import { InputWrapper } from '@/components/InputWrapper';
 import { BaseButton } from '@/components/BaseButton';
 import { LinkForm } from '@/components/LinkForm';
+import { PAGES_ROUTES } from '@/types/routes';
 
 export const Register = () => {
   return Handlebars.compile(tmpl)({
@@ -82,6 +83,6 @@ export const Register = () => {
       text: 'Создать аккаунт',
       type: 'submit',
     }),
-    loginLink: LinkForm({ text: 'Войти', url: '/' }),
+    loginLink: LinkForm({ text: 'Войти', url: PAGES_ROUTES.login }),
   });
 };
