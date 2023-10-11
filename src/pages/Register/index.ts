@@ -5,11 +5,16 @@ import { InputWrapper } from '@/components/InputWrapper';
 import { BaseButton } from '@/components/BaseButton';
 import { LinkForm } from '@/components/LinkForm';
 import { PAGES_ROUTES } from '@/types/routes';
+import Block from '@/utils/Block';
 
-export const Register = () => {
-  return Handlebars.compile(tmpl)({
-    layoutTitle: LayoutTitle({ text: 'Регистрация' }),
-    inputEmail: InputWrapper({
+export class Register extends Block {
+  constructor() {
+    super('div', {});
+  }
+
+  init() {
+    this.children.layoutTitle = new LayoutTitle({ text: 'Регистрация' });
+    this.children.inputEmail = new InputWrapper({
       label: 'Почта',
       input_id: 'register-email',
       input_type: 'email',
@@ -18,8 +23,8 @@ export const Register = () => {
       minLenght: 1,
       maxLenght: 40,
       pattern: '.{1,}',
-    }),
-    inputLogin: InputWrapper({
+    });
+    this.children.inputLogin = new InputWrapper({
       label: 'Логин',
       input_id: 'register-login',
       input_type: 'text',
@@ -28,8 +33,8 @@ export const Register = () => {
       minLenght: 2,
       maxLenght: 40,
       pattern: '^[А-Яа-яЁёA-Za-zs-]+$',
-    }),
-    inputFirstName: InputWrapper({
+    });
+    this.children.inputFirstName = new InputWrapper({
       label: 'Имя',
       input_id: 'register-first-name',
       input_type: 'text',
@@ -38,8 +43,8 @@ export const Register = () => {
       minLenght: 1,
       maxLenght: 30,
       pattern: '.{1,}',
-    }),
-    inputSecondName: InputWrapper({
+    });
+    this.children.inputSecondName = new InputWrapper({
       label: 'Фамилия',
       input_id: 'register-second-name',
       input_type: 'text',
@@ -48,8 +53,8 @@ export const Register = () => {
       minLenght: 1,
       maxLenght: 30,
       pattern: '.{1,}',
-    }),
-    inputPhone: InputWrapper({
+    });
+    this.children.inputPhone = new InputWrapper({
       label: 'Телефон',
       input_id: 'register-phone',
       input_type: 'phone',
@@ -58,8 +63,8 @@ export const Register = () => {
       minLenght: 11,
       maxLenght: 11,
       pattern: '.{1,}',
-    }),
-    inputPassword: InputWrapper({
+    });
+    this.children.inputPassword = new InputWrapper({
       label: 'Пароль',
       input_id: 'register-password',
       input_type: 'password',
@@ -68,8 +73,8 @@ export const Register = () => {
       minLenght: 2,
       maxLenght: 30,
       pattern: '.{1,}',
-    }),
-    inputDoublePassword: InputWrapper({
+    });
+    this.children.inputDoublePassword = new InputWrapper({
       label: 'Пароль (ещё раз)',
       input_id: 'register-password-double',
       input_type: 'password',
@@ -78,11 +83,18 @@ export const Register = () => {
       minLenght: 2,
       maxLenght: 30,
       pattern: '.{1,}',
-    }),
-    createAccountButton: BaseButton({
+    });
+    this.children.createAccountButton = new BaseButton({
       text: 'Создать аккаунт',
       type: 'submit',
-    }),
-    loginLink: LinkForm({ text: 'Войти', url: PAGES_ROUTES.login }),
-  });
-};
+    });
+    this.children.loginLink = new LinkForm({
+      text: 'Войти',
+      url: PAGES_ROUTES.login,
+    });
+  }
+
+  render() {
+    return this.compile(tmpl, this.props);
+  }
+}

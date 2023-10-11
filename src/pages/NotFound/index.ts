@@ -1,19 +1,40 @@
-import Handlebars from 'handlebars';
 import { tmplNotFound, tmplServerError } from './notFound.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
 import { LinkForm } from '@/components/LinkForm';
 import { PAGES_ROUTES } from '@/types/routes';
+import Block from '@/utils/Block';
 
-export const NotFound = () => {
-  return Handlebars.compile(tmplNotFound)({
-    layoutTitle: LayoutTitle({ text: '404' }),
-    BackLink: LinkForm({ text: 'Назад к чатам', url: PAGES_ROUTES.chat }),
-  });
-};
+export class NotFound extends Block {
+  constructor() {
+    super('div', {});
+  }
 
-export const ServerError = () => {
-  return Handlebars.compile(tmplServerError)({
-    layoutTitle: LayoutTitle({ text: '500' }),
-    BackLink: LinkForm({ text: 'Назад к чатам', url: PAGES_ROUTES.chat }),
-  });
-};
+  init() {
+    this.children.layoutTitle = new LayoutTitle({ text: '404' });
+    this.children.backLink = BackLink;
+  }
+
+  render() {
+    return this.compile(tmplNotFound, this.props);
+  }
+}
+
+export class ServerError extends Block {
+  constructor() {
+    super('div', {});
+  }
+
+  init() {
+    this.children.layoutTitle = new LayoutTitle({ text: '500' });
+    this.children.backLink = BackLink;
+  }
+
+  render() {
+    return this.compile(tmplServerError, this.props);
+  }
+}
+
+const BackLink = new LinkForm({
+  text: 'Назад к чатам',
+  url: PAGES_ROUTES.chat,
+});

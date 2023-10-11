@@ -1,15 +1,19 @@
-import Handlebars from 'handlebars';
 import { tmpl } from './login.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
 import { InputWrapper } from '@/components/InputWrapper';
-import { BaseButton } from '@/components/BaseButton';
 import { LinkForm } from '@/components/LinkForm';
 import { PAGES_ROUTES } from '@/types/routes';
+import Block from '@/utils/Block';
+import { BaseButton } from '@/components/BaseButton';
 
-export const Login = () => {
-  return Handlebars.compile(tmpl)({
-    layoutTitle: LayoutTitle({ text: 'Вход' }),
-    inputLogin: InputWrapper({
+export class Login extends Block {
+  constructor() {
+    super('div', {});
+  }
+
+  init() {
+    this.children.layoutTitle = new LayoutTitle({ text: 'Вход' });
+    this.children.inputLogin = new InputWrapper({
       label: 'Логин',
       input_id: 'login-name',
       input_type: 'text',
@@ -18,8 +22,8 @@ export const Login = () => {
       minLenght: 2,
       maxLenght: 40,
       pattern: '^[А-Яа-яЁёA-Za-zs-]+$',
-    }),
-    inputPassword: InputWrapper({
+    });
+    this.children.inputPassword = new InputWrapper({
       label: 'Пароль',
       input_id: 'login-password',
       input_type: 'password',
@@ -28,8 +32,18 @@ export const Login = () => {
       minLenght: 2,
       maxLenght: 30,
       pattern: '.{1,}',
-    }),
-    loginButton: BaseButton({ text: 'Войти', type: 'button' }),
-    noAccountLink: LinkForm({ text: 'Нет аккаунта?', url: PAGES_ROUTES.register }),
-  });
-};
+    });
+    this.children.loginButton = new BaseButton({
+      text: 'Войти',
+      type: 'button',
+    });
+    this.children.noAccountLink = new LinkForm({
+      text: 'Нет аккаунта?',
+      url: PAGES_ROUTES.register,
+    });
+  }
+
+  render() {
+    return this.compile(tmpl, this.props);
+  }
+}

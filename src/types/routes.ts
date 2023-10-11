@@ -6,4 +6,5 @@ export const enum PAGES_ROUTES {
   profileChangeData = '/profile-change-data',
   profileChangePassword = '/profile-change-password',
   notFound = '/not-found',
+  serverError = '/server-error',
 }

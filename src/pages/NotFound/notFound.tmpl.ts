@@ -7,7 +7,7 @@ export const tmplNotFound = `
         <span class="${s.text}">
            Не туда попали
         </span>
-        {{{BackLink}}}
+        {{{backLink}}}
     </section>
 </main>
 `;
@@ -19,7 +19,7 @@ export const tmplServerError = `
         <span class="${s.text}">
            Мы уже фиксим
         </span>
-        {{{BackLink}}}
+        {{{backLink}}}
     </section>
 </main>
 `;

@@ -1,5 +1,5 @@
+import Block from '@/utils/Block';
 import { tmpl } from './inputWrapper.tmpl';
-import Handlebars from 'handlebars';
 
 type InputProps = {
   label: string;
@@ -12,6 +12,12 @@ type InputProps = {
   pattern: string;
 };
 
-export const InputWrapper = (props: InputProps) => {
-  return Handlebars.compile(tmpl)(props);
-};
+export class InputWrapper extends Block {
+  constructor(props: InputProps) {
+    super('div', props);
+  }
+
+  render() {
+    return this.compile(tmpl, this.props);
+  }
+}

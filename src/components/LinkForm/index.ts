@@ -1,9 +1,15 @@
 import { PAGES_ROUTES } from '@/types/routes';
 import { tmpl } from './linkForm.tmpl';
-import Handlebars from 'handlebars';
+import Block from '@/utils/Block';
 
 type LinkFormProps = { text: string; url: PAGES_ROUTES };
 
-export const LinkForm = (props: LinkFormProps) => {
-  return Handlebars.compile(tmpl)(props);
-};
+export class LinkForm extends Block {
+  constructor(props: LinkFormProps) {
+    super('div', props);
+  }
+
+  render() {
+    return this.compile(tmpl, this.props);
+  }
+}

@@ -1,12 +1,20 @@
+import Block from '@/utils/Block';
 import { tmpl } from './baseButton.tmpl';
-import Handlebars from 'handlebars';
 
-export type BaseButtonProps = {
+type BaseButtonProps = {
   text: string;
   type?: string;
-  onClickButton?: string;
+  events?: {
+    click: (e: Event) => void;
+  };
 };
 
-export const BaseButton = (props: BaseButtonProps) => {
-  return Handlebars.compile(tmpl)(props);
-};
+export class BaseButton extends Block {
+  constructor(props: BaseButtonProps) {
+    super('div', props);
+  }
+
+  render() {
+    return this.compile(tmpl, this.props);
+  }
+}
