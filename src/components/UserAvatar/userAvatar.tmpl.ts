@@ -1,7 +1,7 @@
 import s from './userAvatar.module.scss';
 
 export const tmpl = `
-  <button onclick="{{onClickAvatar}}" class="${s.button}">
+  <button class="${s.button}">
       <img class="${s.image}" src={{imageUrl}} alt="Avatar" />
       <div class="${s.overlay}">
           <span class="${s.overlay_text}">Изменить <br/> аватар</span>
