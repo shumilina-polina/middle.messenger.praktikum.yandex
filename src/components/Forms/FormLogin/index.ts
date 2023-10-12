@@ -3,6 +3,7 @@ import { tmpl } from './formLogin.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import { BaseButton } from '@/components/BaseButton';
 import { onFocusInput } from '../form';
+import { INPUT_PATTERNS } from '@/types/patterns';
 
 type FormLoginProps = {
   events?: {
@@ -24,7 +25,7 @@ export class FormLogin extends Block {
       is_required: true,
       minLenght: 3,
       maxLenght: 20,
-      pattern: '((([0-9A-Za-z]|-|_)*[A-Za-z]+)|([A-Za-z]+([0-9A-Za-z]|-|_)+))+',
+      pattern: INPUT_PATTERNS.login,
       events: {
         focus: onFocusInput,
       },
@@ -35,9 +36,9 @@ export class FormLogin extends Block {
       input_type: 'password',
       input_name: 'password',
       is_required: true,
-      minLenght: 2,
-      maxLenght: 30,
-      pattern: '.{1,}',
+      minLenght: 8,
+      maxLenght: 40,
+      pattern: INPUT_PATTERNS.password,
       events: {
         focus: onFocusInput,
       },

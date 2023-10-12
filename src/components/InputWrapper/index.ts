@@ -1,5 +1,6 @@
 import Block from '@/utils/Block';
 import { tmpl } from './inputWrapper.tmpl';
+import { INPUT_PATTERNS } from '@/types/patterns';
 
 type InputProps = {
   label: string;
@@ -9,7 +10,7 @@ type InputProps = {
   is_required: boolean;
   minLenght?: number;
   maxLenght?: number;
-  pattern: string;
+  pattern?: INPUT_PATTERNS;
   events?: {
     focus?: (e: FocusEvent) => void;
     blur?: (e: Event) => void;

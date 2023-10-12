@@ -1,3 +1,4 @@
+import { EventBus } from './../../utils/EventBus';
 import { tmpl } from './register.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
 import { InputWrapper } from '@/components/InputWrapper';
@@ -5,6 +6,7 @@ import { BaseButton } from '@/components/BaseButton';
 import { LinkForm } from '@/components/LinkForm';
 import { PAGES_ROUTES } from '@/types/routes';
 import Block from '@/utils/Block';
+import { INPUT_PATTERNS } from '@/types/patterns';
 
 export class Register extends Block {
   constructor() {
@@ -16,12 +18,12 @@ export class Register extends Block {
     this.children.inputEmail = new InputWrapper({
       label: 'Почта',
       input_id: 'register-email',
-      input_type: 'email',
+      // input_type: 'email',
+      input_type: 'text',
       input_name: 'email',
       is_required: true,
       minLenght: 1,
-      maxLenght: 40,
-      pattern: '.{1,}',
+      pattern: INPUT_PATTERNS.email,
     });
     this.children.inputLogin = new InputWrapper({
       label: 'Логин',
@@ -31,7 +33,7 @@ export class Register extends Block {
       is_required: true,
       minLenght: 2,
       maxLenght: 40,
-      pattern: '^[А-Яа-яЁёA-Za-zs-]+$',
+      pattern: INPUT_PATTERNS.login,
     });
     this.children.inputFirstName = new InputWrapper({
       label: 'Имя',
@@ -41,7 +43,7 @@ export class Register extends Block {
       is_required: true,
       minLenght: 1,
       maxLenght: 30,
-      pattern: '.{1,}',
+      pattern: INPUT_PATTERNS.name,
     });
     this.children.inputSecondName = new InputWrapper({
       label: 'Фамилия',
@@ -51,7 +53,7 @@ export class Register extends Block {
       is_required: true,
       minLenght: 1,
       maxLenght: 30,
-      pattern: '.{1,}',
+      pattern: INPUT_PATTERNS.name,
     });
     this.children.inputPhone = new InputWrapper({
       label: 'Телефон',
@@ -59,9 +61,9 @@ export class Register extends Block {
       input_type: 'phone',
       input_name: 'phone',
       is_required: true,
-      minLenght: 11,
-      maxLenght: 11,
-      pattern: '.{1,}',
+      minLenght: 10,
+      maxLenght: 15,
+      pattern: INPUT_PATTERNS.phone,
     });
     this.children.inputPassword = new InputWrapper({
       label: 'Пароль',
@@ -71,7 +73,7 @@ export class Register extends Block {
       is_required: true,
       minLenght: 2,
       maxLenght: 30,
-      pattern: '.{1,}',
+      pattern: INPUT_PATTERNS.password,
     });
     this.children.inputDoublePassword = new InputWrapper({
       label: 'Пароль (ещё раз)',
@@ -81,7 +83,7 @@ export class Register extends Block {
       is_required: true,
       minLenght: 2,
       maxLenght: 30,
-      pattern: '.{1,}',
+      pattern: INPUT_PATTERNS.password,
     });
     this.children.createAccountButton = new BaseButton({
       text: 'Создать аккаунт',
