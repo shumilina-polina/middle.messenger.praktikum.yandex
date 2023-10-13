@@ -1,8 +1,9 @@
-import { tmpl, tmplPasswordChange, tmplProfileChange } from './profile.tmpl';
+import { tmpl, tmplChange } from './profile.tmpl';
 import { BaseButton } from '@/components/BaseButton';
-import { data, passwordInputs } from './testdata';
 import { UserAvatar } from '@/components/UserAvatar';
 import Block from '@/utils/Block';
+import { FormUserData } from '@/components/Forms/FormUserData';
+import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
 
 const onClickAvatar = () => {
   const popupAvatar = document.querySelector('.popup-avatar');
@@ -32,9 +33,12 @@ export class Profile extends Block {
 
   init() {
     this.children.avatar = new UserAvatar(avatarOptions);
+    this.children.formDisabled = new FormUserData({
+      disabled: true,
+    });
   }
   render() {
-    return this.compile(tmpl, { ...this.props, data });
+    return this.compile(tmpl, this.props);
   }
 }
 
@@ -45,13 +49,19 @@ export class ProfileChangeData extends Block {
 
   init() {
     this.children.avatar = new UserAvatar(avatarOptions);
+    this.children.formActive = new FormUserData({
+      events: {
+        submit: onSubmitForm,
+      },
+      disabled: false,
+    });
     this.children.saveButton = new BaseButton({
       text: 'Сохранить',
       type: 'button',
     });
   }
   render() {
-    return this.compile(tmplProfileChange, { ...this.props, data });
+    return this.compile(tmplChange, this.props);
   }
 }
 
@@ -62,12 +72,22 @@ export class ProfileChangePassword extends Block {
 
   init() {
     this.children.avatar = new UserAvatar(avatarOptions);
+    this.children.formActive = new FormUserData({
+      disabled: false,
+      changePassword: true,
+      events: {
+        submit: (e) => {
+          checkPasswordMatching(e.target as HTMLFormElement);
+          onSubmitForm(e);
+        },
+      },
+    });
     this.children.saveButton = new BaseButton({
       text: 'Сохранить',
       type: 'button',
     });
   }
   render() {
-    return this.compile(tmplPasswordChange, { ...this.props, passwordInputs });
+    return this.compile(tmplChange, this.props);
   }
 }

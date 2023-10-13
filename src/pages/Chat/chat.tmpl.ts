@@ -33,9 +33,7 @@ export const tmpl = `
     <section class="${s.feed}">
         <main>Выберите чат, чтобы отправить сообщение</main>
         <footer>
-            <form>
-                <input class="${s.feed_text} type="text" placeholder="Сообщение" id="feed-text" name="message" />
-            </form>
+           {{{formMessage}}}
         </footer>
     </section>
 </main>

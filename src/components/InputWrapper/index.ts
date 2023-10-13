@@ -1,8 +1,10 @@
 import Block from '@/utils/Block';
 import { tmpl } from './inputWrapper.tmpl';
 import { INPUT_PATTERNS } from '@/types/patterns';
+import { onFocusInput } from '../Forms/form';
 
 type InputProps = {
+  class?: string;
   label: string;
   input_id: string;
   input_type: string;
@@ -11,15 +13,17 @@ type InputProps = {
   minLenght?: number;
   maxLenght?: number;
   pattern?: INPUT_PATTERNS;
-  events?: {
-    focus?: (e: FocusEvent) => void;
-    blur?: (e: Event) => void;
-  };
+  placeholder: string;
 };
 
 export class InputWrapper extends Block {
   constructor(props: InputProps) {
-    super('div', props);
+    super('div', {
+      ...props,
+      events: {
+        focus: onFocusInput,
+      },
+    });
   }
 
   _addEvents() {
