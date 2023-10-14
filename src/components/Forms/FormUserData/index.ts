@@ -104,7 +104,7 @@ export class FormUserData extends Block {
         input_id: 'user-display-name',
         input_type: 'text',
         input_name: 'display_name',
-        label: 'Имя в чате',
+        label: 'Имя в чате',
         placeholder: 'Полинка',
         is_required: true,
         minLenght: 1,

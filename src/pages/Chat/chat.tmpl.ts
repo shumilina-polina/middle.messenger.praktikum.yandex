@@ -31,7 +31,7 @@ export const tmpl = `
         </main>
     </section>
     <section class="${s.feed}">
-        <main>Выберите чат, чтобы отправить сообщение</main>
+        <main>Выберите чат, чтобы отправить сообщение</main>
         <footer>
            {{{formMessage}}}
         </footer>

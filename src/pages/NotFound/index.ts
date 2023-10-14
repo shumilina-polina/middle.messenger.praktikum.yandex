@@ -35,6 +35,6 @@ export class ServerError extends Block {
 }
 
 const BackLink = new LinkForm({
-  text: 'Назад к чатам',
+  text: 'Назад к чатам',
   url: PAGES_ROUTES.chat,
 });
