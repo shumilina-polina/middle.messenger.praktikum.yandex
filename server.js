@@ -9,3 +9,4 @@ app.use('/*', express.static('./dist/'));
 app.listen(PORT, () => {
   console.log(`Web-messenger listening on port ${PORT}!`);
 });
+
