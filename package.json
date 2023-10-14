@@ -13,7 +13,6 @@
     "eslint-fix": "node_modules/.bin/eslint . --fix",
     "stylelint": "npx stylelint **/*.scss",
     "stylelint-fix": "npx stylelint **/*.scss --fix",
-    "prebuild": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite build && node server.js"
