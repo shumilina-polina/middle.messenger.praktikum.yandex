@@ -37,6 +37,17 @@ export class InputWrapper extends Block {
     });
   }
 
+  _removeEvents() {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      this.element!.querySelector('input')?.removeEventListener(
+        eventName,
+        events[eventName]
+      );
+    });
+  }
+
   render() {
     return this.compile(tmpl, this.props);
   }
