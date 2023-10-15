@@ -9,9 +9,11 @@
   font-weight: 500;
   line-height: 13px;
   transition: background-color 0.3s;
+
   &:hover {
     background-color: var(--color-blue-hover);
   }
+
   &:active {
     background-color: var(--color-blue-active);
   }

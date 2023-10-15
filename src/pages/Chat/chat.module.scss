@@ -4,16 +4,19 @@
   display: grid;
   grid-template-columns: 2fr 5fr;
 }
+
 .dialogues {
   max-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
+
   & > main {
     overflow: auto;
     padding: 0;
     max-height: 100%;
   }
 }
+
 .nav {
   padding: 21px 10px 14px;
   color: #999;
@@ -27,11 +30,13 @@
     text-align: right;
     color: inherit;
     transition: color 0.2s;
+
     &:hover {
       color: #5c5c5c;
       text-decoration: underline;
     }
   }
+
   &_search {
     width: 100%;
     padding: 10px 0;
@@ -50,11 +55,13 @@
   border-top: 1px solid #eaeaea;
   transition: background-color 0.2s;
   cursor: pointer;
+
   &:hover {
     background-color: #e4edfd;
   }
+
   &:active {
-    background-color: rgba(207, 216, 227, 0.652);
+    background-color: rgb(207 216 227 / 65.2%);
   }
 
   &_avatar {
@@ -72,6 +79,7 @@
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     &__message {
       color: #999;
       font-size: 12px;
@@ -93,12 +101,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+
     &__time {
       color: #999;
       text-align: right;
       font-size: 9px;
       font-weight: 500;
     }
+
     &__count {
       display: flex;
       align-items: center;
@@ -124,14 +134,9 @@
   display: grid;
   grid-template-rows: 1fr auto;
   align-items: center;
+
   & > footer {
     width: 90%;
     align-self: flex-start;
-  }
-  &_text {
-    border-radius: 30px;
-    background: #efefef;
-    padding: 10px 20px;
-    width: 100%;
   }
 }

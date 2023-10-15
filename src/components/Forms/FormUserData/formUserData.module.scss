@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  & > div:last-child button {
+    margin-top: 40px;
+  }
+  & > div > div {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    font-size: 13px;
+    font-weight: 500;
+
+    & > input {
+      text-overflow: ellipsis;
+      justify-self: end;
+      text-align: right;
+      color: #999;
+      width: 80%;
+    }
+
+    & > label {
+      color: #1e1e1e !important;
+      opacity: 1 !important;
+      font-size: inherit !important;
+      pointer-events: all !important;
+    }
+  }
+}
+.disabled {
+  pointer-events: none;
+  background-color: inherit;
+}
