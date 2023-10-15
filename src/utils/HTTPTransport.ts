@@ -11,6 +11,8 @@ type Options = {
   timeout?: number;
 };
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
+
 function queryStringify(data: Record<string, string> | undefined) {
   if (data) {
     let queryString = '?';
@@ -24,7 +26,7 @@ function queryStringify(data: Record<string, string> | undefined) {
 }
 
 export class HTTPTransport {
-  get = (url: string, options: Options = {}) => {
+  get: HTTPMethod = (url, options = {}) => {
     return this.request(
       url + queryStringify(options.data),
       { ...options, method: METHODS.GET },
@@ -32,13 +34,13 @@ export class HTTPTransport {
     );
   };
 
-  post = (url: string, options: Options = {}) =>
+  post: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
-  put = (url: string, options: Options = {}) =>
+  put: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
-  delete = (url: string, options: Options = {}) =>
+  delete: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
   request = (url: string, options: Options, timeout = 5000) => {
