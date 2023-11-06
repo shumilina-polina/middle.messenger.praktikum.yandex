@@ -1,34 +1,46 @@
+import { PAGES_ROUTES } from '@/types/routes';
 import '@/styles/share-styles.scss';
-import { Chat } from '@/pages/Chat';
-import { Login } from '@/pages/Login';
-import { Register } from '@/pages/Register';
-import { NotFound, ServerError } from '@/pages/NotFound';
+import Router from './utils/Router';
 import {
-  Profile,
   ProfileChangeData,
+  Profile,
   ProfileChangePassword,
-} from '@/pages/Profile';
+} from './pages/Profile';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Chat } from './pages/Chat';
 
-const ROUTES: Record<string, any> = {
-  '/server-error': new ServerError(),
-  '/not-found': new NotFound(),
-  '/profile-change-password': new ProfileChangePassword(),
-  '/profile-change-data': new ProfileChangeData(),
-  '/profile': new Profile(),
-  '/chat': new Chat(),
-  '/register': new Register(),
-  '/': new Login(),
-};
+window.addEventListener('DOMContentLoaded', async () => {
+  Router.use(PAGES_ROUTES.login, Login)
+    .use(PAGES_ROUTES.register, Register)
+    .use(PAGES_ROUTES.chat, Chat)
+    .use(PAGES_ROUTES.profile, Profile)
+    .use(PAGES_ROUTES.profileChangeData, ProfileChangeData)
+    .use(PAGES_ROUTES.profileChangePassword, ProfileChangePassword);
 
-window.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('app');
+  // let isProtectedRoute = true;
 
-  if (root) {
-    const component =
-      ROUTES[window.location.pathname] ||
-      ROUTES[window.location.pathname.slice(0, -1)] ||
-      new NotFound();
-    root.append(component.element!);
-    component.dispatchComponentDidMount();
+  // switch (window.location.pathname) {
+  //   case PAGES_ROUTES.login:
+  //   case PAGES_ROUTES.register:
+  //     isProtectedRoute = false;
+  //     break;
+  // }
+
+  try {
+    // await AuthController.fetchUser();
+
+    Router.start();
+
+    // if (!isProtectedRoute) {
+    //   Router.go(PAGES_ROUTES.profile);
+    // }
+  } catch (e) {
+    console.log(e, 'Here');
+    Router.start();
+
+    // if (isProtectedRoute) {
+    //   Router.go(PAGES_ROUTES.login);
+    // }
   }
 });
