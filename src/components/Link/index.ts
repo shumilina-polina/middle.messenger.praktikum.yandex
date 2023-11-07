@@ -1,22 +1,17 @@
-import { PAGES_ROUTES } from '@/types/routes';
 import { tmpl } from './link.tmpl';
-import Block from '@/utils/Block';
-import Router from '@/utils/Router';
+import Block from '@/core/Block';
 
 type LinkProps = {
   text: string;
-  url: PAGES_ROUTES;
-  className: Record<string, string>;
+  className?: Record<string, string>;
+  events?: {
+    click: (e: Event) => void;
+  };
 };
 
 export class Link extends Block {
   constructor(props: LinkProps) {
-    super('div', {
-      ...props,
-      events: {
-        click: () => Router.go(props.url),
-      },
-    });
+    super('div', props);
   }
 
   render() {

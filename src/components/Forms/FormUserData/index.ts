@@ -1,4 +1,4 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmpl } from './formUserData.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import { INPUT_PATTERNS } from '@/types/patterns';

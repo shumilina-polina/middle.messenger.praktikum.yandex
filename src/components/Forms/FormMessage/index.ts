@@ -1,4 +1,4 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmpl } from './formMessage.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import s from './formMessage.module.scss';

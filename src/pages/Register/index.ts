@@ -2,9 +2,10 @@ import { tmpl } from './register.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
 import { Link } from '@/components/Link';
 import { PAGES_ROUTES } from '@/types/routes';
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
 import { FormRegister } from '@/components/Forms/FormRegister';
+import Router from '@/core/Router';
 
 export class Register extends Block {
   constructor() {
@@ -24,7 +25,9 @@ export class Register extends Block {
 
     this.children.loginLink = new Link({
       text: 'Войти',
-      url: PAGES_ROUTES.chat,
+      events: {
+        click: () => Router.go(PAGES_ROUTES.login),
+      },
     });
   }
 

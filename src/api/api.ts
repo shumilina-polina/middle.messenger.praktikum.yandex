@@ -1,5 +1,5 @@
 import { ENDPOINTS } from '@/types/endpoints';
-import { HTTPTransport } from '@/utils/HTTPTransport';
+import { HTTPTransport } from '@/core/HTTPTransport';
 
 export abstract class API {
   protected http: HTTPTransport;

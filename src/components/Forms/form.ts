@@ -1,8 +1,15 @@
+import { LoginData, RegisterData } from '../../types/apiDataTypes';
+import { AuthController } from '@/controller/AuthController';
 import { PAGES_ROUTES } from '@/types/routes';
 
 export const onSubmitForm = (e: SubmitEvent) => {
   e.preventDefault();
-  logFormData(e.target as HTMLFormElement);
+  const data = logFormData(e.target as HTMLFormElement);
+  if ((e.target as HTMLFormElement).dataset.type === 'login') {
+    AuthController.login(data as LoginData);
+  } else if ((e.target as HTMLFormElement).dataset.type === 'register') {
+    AuthController.register(data as RegisterData);
+  }
 };
 
 export const onFocusInput = (e: FocusEvent) => {
@@ -10,15 +17,20 @@ export const onFocusInput = (e: FocusEvent) => {
 };
 
 const logFormData = (form: HTMLFormElement) => {
+  const resultForLog: Record<string, string> = {};
   const resultFormData: Record<string, string> = {};
 
   Object.values(form).forEach((field) => {
-    if (field.tagName === 'INPUT')
-      resultFormData[field.name + ' (' + field.id + ')'] = field.value;
+    if (field.tagName === 'INPUT') {
+      resultForLog[field.name + ' (' + field.id + ')'] = field.value;
+      resultFormData[field.name] = field.value;
+    }
   });
 
-  console.log('Значение полей формы: ', resultFormData);
+  console.log('Значение полей формы: ', resultForLog);
+
   form.reset();
+  return resultFormData;
 };
 
 export const checkPasswordMatching = (form: HTMLFormElement) => {

@@ -1,4 +1,4 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmpl } from './inputWrapper.tmpl';
 import { INPUT_PATTERNS } from '@/types/patterns';
 import { onFocusInput } from '../Forms/form';

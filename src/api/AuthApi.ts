@@ -1,6 +1,6 @@
 import { API } from './api';
 import { ENDPOINTS } from '@/types/endpoints';
-import { LoginData, RegisterData, UserData } from './apiDataTypes';
+import { LoginData, RegisterData, UserData } from '../types/apiDataTypes';
 
 class AuthApi extends API {
   constructor() {
@@ -8,11 +8,11 @@ class AuthApi extends API {
   }
 
   register(data: RegisterData) {
-    return this.http.post('/signup', { data });
+    return this.http.post('/signup', { data: data });
   }
 
   login(data: LoginData) {
-    return this.http.post('/signin', { data });
+    return this.http.post('/signin', { data: data });
   }
 
   logout() {

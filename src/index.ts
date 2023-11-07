@@ -1,6 +1,6 @@
 import { PAGES_ROUTES } from '@/types/routes';
 import '@/styles/share-styles.scss';
-import Router from './utils/Router';
+import Router from './core/Router';
 import {
   ProfileChangeData,
   Profile,
@@ -33,11 +33,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     Router.start();
 
-    // if (!isProtectedRoute) {
-    //   Router.go(PAGES_ROUTES.profile);
-    // }
+    if (!isProtectedRoute) {
+      Router.go(PAGES_ROUTES.profile);
+    }
   } catch (e) {
-    console.log(e, 'Here');
+    console.log('Ошибка: ', e);
     Router.start();
 
     if (isProtectedRoute) {

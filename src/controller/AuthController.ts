@@ -1,19 +1,23 @@
 import AuthApi from '@/api/AuthApi';
-import { LoginData, RegisterData } from '@/api/apiDataTypes';
+import Router from '@/core/Router';
+import { store } from '@/core/Store';
+import { LoginData, RegisterData } from '@/types/apiDataTypes';
+import { PAGES_ROUTES } from '@/types/routes';
 
 export class AuthController {
   static async fetchUser() {
     try {
       const user = await AuthApi.getUser();
-      console.log('user: ', user);
+      store.set('user', user);
     } catch (err) {
-      console.log('Ошибка получения информации о пользователе: ', err);
+      throw err;
     }
   }
 
   static async login(data: LoginData) {
     try {
-      AuthApi.login(data);
+      await AuthApi.login(data);
+      Router.go(PAGES_ROUTES.profile);
     } catch (err) {
       console.log('Ошибка входа: ', err);
     }
@@ -21,7 +25,9 @@ export class AuthController {
 
   static async register(data: RegisterData) {
     try {
-      AuthApi.register(data);
+      await AuthApi.register(data);
+      await this.fetchUser(); // set user in store
+      Router.go(PAGES_ROUTES.profile);
     } catch (err) {
       console.log('Ошибка регистрации: ', err);
     }
@@ -30,6 +36,7 @@ export class AuthController {
   static async logout() {
     try {
       AuthApi.logout();
+      store.set('user', undefined);
     } catch (err) {
       console.log('Ошибка выхода: ', err);
     }

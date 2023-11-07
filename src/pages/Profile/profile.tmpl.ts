@@ -15,13 +15,13 @@ export const tmpl = `
         <footer>
           <ul>
             <li class="${s.links_item}">
-              <a class="${s.links_item__link} ${s.links_item__link_data}" href="${PAGES_ROUTES.profileChangeData}">Изменить данные</a>
+              {{{changeDataLink}}}
             </li>
             <li class="${s.links_item}">
-              <a class="${s.links_item__link} ${s.links_item__link_password}" href="${PAGES_ROUTES.profileChangePassword}">Изменить пароль</a>
+              {{{changePasswordLink}}}
             </li>
             <li class="${s.links_item}">
-              <a class="${s.links_item__link} ${s.links_item__link_logout}" href="${PAGES_ROUTES.login}">Выйти</a>
+              {{{logoutLink}}}
             </li>
           </ul>
         </footer>

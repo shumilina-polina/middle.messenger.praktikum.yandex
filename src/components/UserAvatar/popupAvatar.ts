@@ -1,4 +1,4 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmplPopup } from './userAvatar.tmpl';
 import { BaseButton } from '../BaseButton';
 

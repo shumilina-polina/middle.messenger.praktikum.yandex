@@ -1,12 +1,14 @@
 import { tmpl, tmplChange } from './profile.tmpl';
 import { BaseButton } from '@/components/BaseButton';
 import { UserAvatar } from '@/components/UserAvatar';
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { FormUserData } from '@/components/Forms/FormUserData';
 import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
 import { Link } from '@/components/Link';
 import { PAGES_ROUTES } from '@/types/routes';
 import s from './profile.module.scss';
+import Router from '@/core/Router';
+import { AuthController } from '@/controller/AuthController';
 
 const avatarOptions = {
   imageUrl:
@@ -19,16 +21,42 @@ export class Profile extends Block {
   }
 
   init() {
-    this.children.backLink = new Link({
-      text: '',
-      url: PAGES_ROUTES.chat,
-      className: s.prev_link,
+    this.children.logoutLink = new Link({
+      text: 'Выйти',
+      className: s.links_item__link_logout,
+      events: {
+        click: () => {
+          AuthController.logout();
+          Router.go(PAGES_ROUTES.login);
+        },
+      },
     });
+
+    this.children.changeDataLink = new Link({
+      text: 'Изменить данные',
+      events: {
+        click: () => Router.go(PAGES_ROUTES.profileChangeData),
+      },
+    });
+
+    this.children.changePasswordLink = new Link({
+      text: 'Изменить пароль',
+      events: {
+        click: () => Router.go(PAGES_ROUTES.profileChangePassword),
+      },
+    });
+
+    this.children.backLink = backLink;
     this.children.avatar = new UserAvatar(avatarOptions);
     this.children.formDisabled = new FormUserData({
       disabled: true,
     });
   }
+
+  componentDidMount(): void {
+    AuthController.fetchUser();
+  }
+
   render() {
     return this.compile(tmpl, this.props);
   }
@@ -40,18 +68,16 @@ export class ProfileChangeData extends Block {
   }
 
   init() {
-    this.children.backLink = new Link({
-      text: '',
-      url: PAGES_ROUTES.chat,
-      className: s.prev_link,
-    });
+    this.children.backLink = backLink;
     this.children.avatar = new UserAvatar(avatarOptions);
+
     this.children.formActive = new FormUserData({
       events: {
         submit: onSubmitForm,
       },
       disabled: false,
     });
+
     this.children.saveButton = new BaseButton({
       text: 'Сохранить',
       type: 'button',
@@ -68,11 +94,7 @@ export class ProfileChangePassword extends Block {
   }
 
   init() {
-    this.children.backLink = new Link({
-      text: '',
-      url: PAGES_ROUTES.chat,
-      className: s.prev_link,
-    });
+    this.children.backLink = backLink;
     this.children.avatar = new UserAvatar(avatarOptions);
     this.children.formActive = new FormUserData({
       disabled: false,
@@ -93,3 +115,11 @@ export class ProfileChangePassword extends Block {
     return this.compile(tmplChange, this.props);
   }
 }
+
+const backLink = new Link({
+  text: '',
+  events: {
+    click: () => Router.go(PAGES_ROUTES.chat),
+  },
+  className: s.prev_link,
+});
