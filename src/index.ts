@@ -9,6 +9,7 @@ import {
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Chat } from './pages/Chat';
+import { AuthController } from './controller/AuthController';
 
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(PAGES_ROUTES.login, Login)
@@ -18,17 +19,17 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(PAGES_ROUTES.profileChangeData, ProfileChangeData)
     .use(PAGES_ROUTES.profileChangePassword, ProfileChangePassword);
 
-  // let isProtectedRoute = true;
+  let isProtectedRoute = true;
 
-  // switch (window.location.pathname) {
-  //   case PAGES_ROUTES.login:
-  //   case PAGES_ROUTES.register:
-  //     isProtectedRoute = false;
-  //     break;
-  // }
+  switch (window.location.pathname) {
+    case PAGES_ROUTES.login:
+    case PAGES_ROUTES.register:
+      isProtectedRoute = false;
+      break;
+  }
 
   try {
-    // await AuthController.fetchUser();
+    await AuthController.fetchUser();
 
     Router.start();
 
@@ -39,8 +40,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log(e, 'Here');
     Router.start();
 
-    // if (isProtectedRoute) {
-    //   Router.go(PAGES_ROUTES.login);
-    // }
+    if (isProtectedRoute) {
+      Router.go(PAGES_ROUTES.login);
+    }
   }
 });

@@ -25,9 +25,9 @@
   display: flex;
   flex-direction: column;
   gap: 23px;
+  text-align: right;
 
   &_link {
-    text-align: right;
     color: inherit;
     transition: color 0.2s;
 

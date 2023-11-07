@@ -1,11 +1,10 @@
-import { PAGES_ROUTES } from '@/types/routes';
 import s from './chat.module.scss';
 
 export const tmpl = `
 <main class="${s.layout}">
     <section class="${s.dialogues}">
         <header class="${s.nav}">
-            <a class="${s.nav_link}" href="${PAGES_ROUTES.profile}">Профиль ></a>
+            {{{profileLink}}}
             <form>
                 <input class="${s.nav_search} type="search" placeholder="Поиск" id="dialogues-search" name="search" />
             </form>

@@ -1,6 +1,6 @@
 import { tmpl } from './register.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
-import { LinkForm } from '@/components/LinkForm';
+import { Link } from '@/components/Link';
 import { PAGES_ROUTES } from '@/types/routes';
 import Block from '@/utils/Block';
 import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
@@ -22,9 +22,9 @@ export class Register extends Block {
     });
     this.children.layoutTitle = new LayoutTitle({ text: 'Регистрация' });
 
-    this.children.loginLink = new LinkForm({
+    this.children.loginLink = new Link({
       text: 'Войти',
-      url: PAGES_ROUTES.login,
+      url: PAGES_ROUTES.chat,
     });
   }
 

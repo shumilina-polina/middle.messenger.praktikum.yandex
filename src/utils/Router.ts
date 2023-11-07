@@ -71,7 +71,6 @@ class Router {
   public start() {
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
-
       this._onRoute(target.location.pathname);
     };
 

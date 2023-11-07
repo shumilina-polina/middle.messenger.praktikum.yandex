@@ -4,7 +4,7 @@ import s from './profile.module.scss';
 export const tmpl = `
     <main class="${s.layout}">
       <div class="${s.prev}">
-        <a href="${PAGES_ROUTES.chat}" class="${s.prev_link}"></a>
+        {{{backLink}}}
       </div>
       <section class="${s.profile}">
         <header class="${s.profile_header}">
@@ -32,7 +32,7 @@ export const tmpl = `
 export const tmplChange = `
     <main class="${s.layout}">
       <div class="${s.prev}">
-        <a href="${PAGES_ROUTES.chat}" class="${s.prev_link}"></a>
+        {{{backLink}}}
       </div>
       <section class="${s.profile}">
         <header class="${s.profile_header}">

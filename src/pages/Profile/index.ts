@@ -4,6 +4,9 @@ import { UserAvatar } from '@/components/UserAvatar';
 import Block from '@/utils/Block';
 import { FormUserData } from '@/components/Forms/FormUserData';
 import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
+import { Link } from '@/components/Link';
+import { PAGES_ROUTES } from '@/types/routes';
+import s from './profile.module.scss';
 
 const avatarOptions = {
   imageUrl:
@@ -16,6 +19,11 @@ export class Profile extends Block {
   }
 
   init() {
+    this.children.backLink = new Link({
+      text: '',
+      url: PAGES_ROUTES.chat,
+      className: s.prev_link,
+    });
     this.children.avatar = new UserAvatar(avatarOptions);
     this.children.formDisabled = new FormUserData({
       disabled: true,
@@ -32,6 +40,11 @@ export class ProfileChangeData extends Block {
   }
 
   init() {
+    this.children.backLink = new Link({
+      text: '',
+      url: PAGES_ROUTES.chat,
+      className: s.prev_link,
+    });
     this.children.avatar = new UserAvatar(avatarOptions);
     this.children.formActive = new FormUserData({
       events: {
@@ -55,6 +68,11 @@ export class ProfileChangePassword extends Block {
   }
 
   init() {
+    this.children.backLink = new Link({
+      text: '',
+      url: PAGES_ROUTES.chat,
+      className: s.prev_link,
+    });
     this.children.avatar = new UserAvatar(avatarOptions);
     this.children.formActive = new FormUserData({
       disabled: false,
