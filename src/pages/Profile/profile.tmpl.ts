@@ -1,4 +1,3 @@
-import { PAGES_ROUTES } from '@/types/routes';
 import s from './profile.module.scss';
 
 export const tmpl = `
@@ -9,7 +8,7 @@ export const tmpl = `
       <section class="${s.profile}">
         <header class="${s.profile_header}">
           {{{avatar}}}
-          <h1 class="${s.profile_header__name}">Полина</h1>
+          <h1 class="${s.profile_header__name}">{{userName}}</h1>
         </header>
         {{{formDisabled}}}
         <footer>

@@ -17,7 +17,8 @@ export class AuthController {
   static async login(data: LoginData) {
     try {
       await AuthApi.login(data);
-      Router.go(PAGES_ROUTES.profile);
+      await this.fetchUser(); // set user in store
+      Router.go(PAGES_ROUTES.chat);
     } catch (err) {
       console.log('Ошибка входа: ', err);
     }
@@ -37,6 +38,7 @@ export class AuthController {
     try {
       AuthApi.logout();
       store.set('user', undefined);
+      Router.go(PAGES_ROUTES.login);
     } catch (err) {
       console.log('Ошибка выхода: ', err);
     }

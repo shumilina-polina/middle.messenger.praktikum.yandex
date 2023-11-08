@@ -1,7 +1,7 @@
 import s from './formUserData.module.scss';
 
 export const tmpl = `
-    <form class="${s.form}">
+    <form class="${s.form}" data-type="{{type}}">
       {{{inputEmail}}}
       {{{inputLogin}}}
       {{{inputFirstName}}}

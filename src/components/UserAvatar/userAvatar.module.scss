@@ -60,23 +60,4 @@
     font-size: 15px;
     font-weight: 500;
   }
-
-  &_file {
-    padding: 10px 0;
-    color: #3369f3;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 500;
-    text-decoration-line: underline;
-    cursor: pointer;
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 0.8;
-    }
-
-    &__input {
-      display: none;
-    }
-  }
 }

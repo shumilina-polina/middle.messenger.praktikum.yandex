@@ -20,6 +20,9 @@
       color: #999;
       width: 80%;
     }
+    & > input[type='password'] {
+      border: 1px solid rgba(128, 128, 128, 0.349);
+    }
 
     & > label {
       color: #1e1e1e !important;

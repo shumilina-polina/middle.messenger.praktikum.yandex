@@ -8,13 +8,13 @@ const enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: Record<string, string>;
+  data?: Record<string, string> | FormData;
   timeout?: number;
 };
 
 type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
 
-function queryStringify(data: Record<string, string> | undefined) {
+function queryStringify(data: Record<string, string> | undefined | FormData) {
   if (data) {
     let queryString = '?';
     for (const [key, value] of Object.entries(data)) {
@@ -58,7 +58,7 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method as METHODS, this.endpoint + url);
 
-      xhr.onreadystatechange = (e) => {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
@@ -74,14 +74,15 @@ export class HTTPTransport {
 
       xhr.timeout = timeout;
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
-
       xhr.withCredentials = true;
       xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     });

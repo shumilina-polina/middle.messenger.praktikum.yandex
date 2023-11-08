@@ -24,6 +24,9 @@ export class UserAvatar extends Block {
     this.children.popupAvatar = new PopupAvatar({
       isVisible: false,
     });
+    if (window.location.pathname === '/profile') {
+      this.setProps({ disabled: 'disabled_avatar' });
+    }
   }
 
   _addEvents() {

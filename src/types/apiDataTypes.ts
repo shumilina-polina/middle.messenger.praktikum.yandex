@@ -22,3 +22,17 @@ export type UserData = {
   avatar: string;
   email: string;
 };
+
+export type ChangeData = {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  phone: string;
+  login: string;
+  email: string;
+};
+
+export type ChangePassword = {
+  oldPassword: string;
+  newPassword: string;
+};

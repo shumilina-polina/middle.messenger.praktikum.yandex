@@ -13,7 +13,8 @@ type InputProps = {
   minLenght?: number;
   maxLenght?: number;
   pattern?: INPUT_PATTERNS;
-  placeholder: string;
+  placeholder?: string;
+  value?: string;
 };
 
 export class InputWrapper extends Block {

@@ -1,5 +1,12 @@
-import { LoginData, RegisterData } from '../../types/apiDataTypes';
+import {
+  ChangeData,
+  ChangePassword,
+  LoginData,
+  RegisterData,
+} from '../../types/apiDataTypes';
 import { AuthController } from '@/controller/AuthController';
+import { ChangeDataController } from '@/controller/ChangeDataController';
+import Router from '@/core/Router';
 import { PAGES_ROUTES } from '@/types/routes';
 
 export const onSubmitForm = (e: SubmitEvent) => {
@@ -9,6 +16,29 @@ export const onSubmitForm = (e: SubmitEvent) => {
     AuthController.login(data as LoginData);
   } else if ((e.target as HTMLFormElement).dataset.type === 'register') {
     AuthController.register(data as RegisterData);
+  } else if (
+    (e.target as HTMLFormElement).dataset.type === 'user-change-data'
+  ) {
+    ChangeDataController.changeData(data as ChangeData);
+  } else if (
+    (e.target as HTMLFormElement).dataset.type === 'user-change-password'
+  ) {
+    ChangeDataController.changePassword(data as ChangePassword);
+  }
+};
+
+export const onSubmitAvatar = (e: SubmitEvent) => {
+  e.preventDefault();
+  const inputFiles = Object.values(e.target as HTMLFormElement).find(
+    (field) => field.tagName === 'INPUT'
+  ).files;
+  if (inputFiles.length > 0) {
+    const formData = new FormData();
+    formData.append('avatar', inputFiles[0]);
+    console.log('файл аватара: ', inputFiles[0]);
+    ChangeDataController.changeAvatar(formData as FormData);
+  } else {
+    alert('Необходимо загрузить файл');
   }
 };
 
@@ -47,5 +77,7 @@ export const checkPasswordMatching = (form: HTMLFormElement) => {
   if (passwordsNotMatch) {
     alert('Пароли не совпадают');
     passwordInputs.forEach((input) => (input.value = ''));
+    return false;
   }
+  return true;
 };

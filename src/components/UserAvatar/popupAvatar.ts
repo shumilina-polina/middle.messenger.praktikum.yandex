@@ -1,6 +1,7 @@
 import Block from '@/core/Block';
 import { tmplPopup } from './userAvatar.tmpl';
-import { BaseButton } from '../BaseButton';
+import { FormAvatar } from '../Forms/FormAvatar';
+import { onSubmitAvatar } from '../Forms/form';
 
 type PopupAvatarProps = {
   isVisible: boolean;
@@ -22,11 +23,9 @@ export class PopupAvatar extends Block {
 
   init() {
     this.getContent()?.classList.add('popup-wrapper');
-    this.children.changeButton = new BaseButton({
-      text: 'Изменить',
-      type: 'button',
+    this.children.formAvatar = new FormAvatar({
       events: {
-        click: () => this.setProps({ isVisible: false }),
+        submit: onSubmitAvatar,
       },
     });
   }
