@@ -1,29 +1,39 @@
 import {
   ChangeData,
   ChangePassword,
+  CreateChatData,
   LoginData,
   RegisterData,
 } from '../../types/apiDataTypes';
 import { AuthController } from '@/controller/AuthController';
 import { ChangeDataController } from '@/controller/ChangeDataController';
-import Router from '@/core/Router';
+import { ChatsController } from '@/controller/ChatsController';
 import { PAGES_ROUTES } from '@/types/routes';
 
 export const onSubmitForm = (e: SubmitEvent) => {
   e.preventDefault();
-  const data = logFormData(e.target as HTMLFormElement);
-  if ((e.target as HTMLFormElement).dataset.type === 'login') {
-    AuthController.login(data as LoginData);
-  } else if ((e.target as HTMLFormElement).dataset.type === 'register') {
-    AuthController.register(data as RegisterData);
-  } else if (
-    (e.target as HTMLFormElement).dataset.type === 'user-change-data'
-  ) {
-    ChangeDataController.changeData(data as ChangeData);
-  } else if (
-    (e.target as HTMLFormElement).dataset.type === 'user-change-password'
-  ) {
-    ChangeDataController.changePassword(data as ChangePassword);
+  const form = e.target as HTMLFormElement;
+  const data = logFormData(form);
+
+  switch (form.dataset.type) {
+    case 'login':
+      AuthController.login(data as LoginData);
+      break;
+    case 'register':
+      AuthController.register(data as RegisterData);
+      break;
+    case 'user-change-data':
+      ChangeDataController.changeData(data as ChangeData);
+      break;
+    case 'user-change-password':
+      ChangeDataController.changePassword(data as ChangePassword);
+      break;
+    case 'create-chat':
+      ChatsController.createChat(data as CreateChatData);
+      break;
+    default:
+      console.log('неизвестная форма');
+      break;
   }
 };
 

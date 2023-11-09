@@ -1,8 +1,10 @@
 import AuthApi from '@/api/AuthApi';
+import ChatsApi from '@/api/ChatsApi';
 import Router from '@/core/Router';
 import { store } from '@/core/Store';
 import { LoginData, RegisterData } from '@/types/apiDataTypes';
 import { PAGES_ROUTES } from '@/types/routes';
+import { ChatsController } from './ChatsController';
 
 export class AuthController {
   static async fetchUser() {

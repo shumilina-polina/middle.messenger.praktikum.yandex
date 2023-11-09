@@ -1,15 +1,14 @@
 import { PAGES_ROUTES } from '@/types/routes';
 import '@/styles/share-styles.scss';
 import Router from './core/Router';
-import {
-  Profile,
-} from './pages/Profile';
+import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Chat } from './pages/Chat';
 import { AuthController } from './controller/AuthController';
 import { ProfileChangeData } from './pages/Profile/profileChangeData';
 import ProfileChangePassword from './pages/Profile/profileChangePassword';
+import { ChatsController } from './controller/ChatsController';
 
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(PAGES_ROUTES.login, Login)
@@ -30,9 +29,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     await AuthController.fetchUser();
-
+    await ChatsController.fetchChats();
+    // await ChatsController.createChat({ title: 'цветочный магазин' });
     Router.start();
-
     if (!isProtectedRoute) {
       Router.go(PAGES_ROUTES.chat);
     }

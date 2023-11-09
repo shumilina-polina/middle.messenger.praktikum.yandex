@@ -1,4 +1,4 @@
-import { UserData } from '@/types/apiDataTypes';
+import { Chat, UserData } from '@/types/apiDataTypes';
 import { EventBus } from './EventBus';
 import set from '@/utils/set';
 import Block from './Block';
@@ -9,6 +9,8 @@ enum StoreEvents {
 
 export type State = {
   user?: UserData;
+  chats?: Array<Chat>;
+  currentChat?: number; //chats's id
 };
 
 class Store extends EventBus {
@@ -40,7 +42,7 @@ export const withStore = (mapStateToProps: (data: State) => any) => {
         store.on(StoreEvents.Update, () => {
           const newProps = mapStateToProps(store.getState());
 
-          this.setProps(newProps)
+          this.setProps(newProps);
         });
       }
     };

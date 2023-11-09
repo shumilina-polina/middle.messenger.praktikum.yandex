@@ -11,25 +11,21 @@ export const tmpl = `
         </header>
         <main>
             <ul class="${s.chatfeed_list}">
-                {{#each chats}}
-                    <li class="${s.chatfeed}">
-                        <img class="${s.chatfeed_avatar}" src={{imageUrl}} alt="Avatar" />
-                        <div class="${s.chatfeed_content}">
-                        <h3 class="${s.chatfeed_content__name}">{{userName}}</h3>
-                        <p class="${s.chatfeed_content__message}">
-                            {{message}}
-                        </p>
-                        </div>
-                        <div class="${s.chatfeed_info}">
-                        <span class="${s.chatfeed_info__time}">{{time}}</span>
-                        <div class="${s.chatfeed_info__count}">{{count}}</div>
-                        </div>
-                    </li>
-                {{/each}}
+                {{{chatlist0}}}
+                {{{chatlist1}}}
+                {{{chatlist2}}}
+                {{{chatlist3}}}
+                {{{chatlist4}}}
+                {{{chatlist5}}}
+                {{{chatlist6}}}
+                {{{chatlist7}}}
+                {{{chatlist8}}}
+                {{{chatlist9}}}
             </ul>
         </main>
     </section>
     <section class="${s.feed}">
+        {{{formCreateChat}}}
         <main>Выберите чат, чтобы отправить сообщение</main>
         <footer>
            {{{formMessage}}}

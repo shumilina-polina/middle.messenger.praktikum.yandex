@@ -12,7 +12,7 @@ export class UserAvatar extends Block {
       ...props,
       events: {
         click: () => {
-          this.children.popupAvatar.setProps({
+          (this.children.popupAvatar as Block).setProps({
             isVisible: true,
           });
         },

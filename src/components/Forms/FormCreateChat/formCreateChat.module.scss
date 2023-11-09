@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  & button {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background-image: url('/src/assets/send.svg');
+    background-size: 70% 70%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+.label {
+  color: #c7c7c7;
+}
+
+.input {
+  border-radius: 30px;
+  background: #efefef;
+  padding: 10px 20px;
+  width: 100%;
+}

@@ -5,7 +5,7 @@ import { onFocusInput } from '../Forms/form';
 
 type InputProps = {
   class?: string;
-  label: string;
+  label?: string;
   input_id: string;
   input_type: string;
   input_name: string;

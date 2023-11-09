@@ -2,6 +2,7 @@ import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
 import { EventBus } from './EventBus';
+import isEqual from '@/utils/isEqual';
 
 // Нельзя создавать экземпляр данного класса
 class Block<P extends Record<string, any> = any> {
@@ -14,7 +15,7 @@ class Block<P extends Record<string, any> = any> {
 
   public id = nanoid(6);
   protected props: P;
-  public children: Record<string, Block>;
+  public children: Record<string, Block | Array<Block>>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
   private _meta: { tagName: string; props: P };
@@ -114,9 +115,15 @@ class Block<P extends Record<string, any> = any> {
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-    Object.values(this.children).forEach((child) =>
-      child.dispatchComponentDidMount()
-    );
+    Object.values(this.children).forEach((child) => {
+      if (!Array.isArray(child)) {
+        child.dispatchComponentDidMount();
+      } else {
+        child.forEach((arrayChild) => {
+          arrayChild.dispatchComponentDidMount();
+        });
+      }
+    });
   }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -126,7 +133,7 @@ class Block<P extends Record<string, any> = any> {
   }
 
   protected componentDidUpdate(_oldProps: P, _newProps: P) {
-    return true;
+    return isEqual(_oldProps, _newProps);
   }
 
   setProps = (nextProps: P) => {
@@ -156,7 +163,13 @@ class Block<P extends Record<string, any> = any> {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      if (!Array.isArray(component)) {
+        contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      } else {
+        component.forEach((item, i) => {
+          contextAndStubs[name + i] = `<div data-id="${item.id}"></div>`;
+        });
+      }
     });
 
     const html = Handlebars.compile(template)(contextAndStubs);
@@ -166,15 +179,27 @@ class Block<P extends Record<string, any> = any> {
     temp.innerHTML = html;
 
     Object.entries(this.children).forEach(([_, component]) => {
-      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+      if (!Array.isArray(component)) {
+        const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+        if (!stub) {
+          return;
+        }
+        component.getContent()?.append(...Array.from(stub.childNodes));
 
-      if (!stub) {
-        return;
+        stub.replaceWith(component.getContent()!);
+      } else {
+        component.forEach((arrayChild) => {
+          const stub = temp.content.querySelector(
+            `[data-id="${arrayChild.id}"]`
+          );
+          if (!stub) {
+            return;
+          }
+          arrayChild.getContent()?.append(...Array.from(stub.childNodes));
+
+          stub.replaceWith(arrayChild.getContent()!);
+        });
       }
-
-      component.getContent()?.append(...Array.from(stub.childNodes));
-
-      stub.replaceWith(component.getContent()!);
     });
 
     return temp.content;
