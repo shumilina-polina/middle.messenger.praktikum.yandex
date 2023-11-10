@@ -8,7 +8,7 @@ const enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: Record<string, string> | FormData;
+  data?: Record<string, string | number> | FormData;
   timeout?: number;
 };
 
@@ -36,7 +36,7 @@ export class HTTPTransport {
 
   get: HTTPMethod = (url = '/', options = {}) => {
     return this.request(
-      url + queryStringify(options.data),
+      url + queryStringify(options.data as Record<string, string>),
       { ...options, method: METHODS.GET },
       options.timeout
     );

@@ -21,7 +21,9 @@ export const tmpl = `
         </div>
         <div class="${s.chatfeed_info}">
         <span class="${s.chatfeed_info__time}">{{time}}</span>
-        <div class="${s.chatfeed_info__count}">{{unread_count}}</div>
-        </div>
+        {{#if (hasUnread unread_count)}}
+            <div class="${s.chatfeed_info__count}">{{unread_count}}</div>
+            </div>
+        {{/if}}
     </li>
 `;

@@ -4,6 +4,7 @@ import Handlebars from 'handlebars';
 import Block from '@/core/Block';
 import { BaseButton } from '../BaseButton';
 import { PopupAvatar } from '../UserAvatar/popupAvatar';
+import { ChatsController } from '@/controller/ChatsController';
 
 class BaseChatWindow extends Block {
   init() {
@@ -11,13 +12,27 @@ class BaseChatWindow extends Block {
       return value !== undefined;
     });
     this.children.addAvatarButton = new BaseButton({
-      text: 'Добавить аватар',
+      text: 'Обновить аватар',
       type: 'button',
       events: {
         click: () => {
           (this.children.popupAvatar as Block).setProps({
             isVisible: true,
           });
+        },
+      },
+    });
+    this.children.deleteChatButton = new BaseButton({
+      text: 'Удалить чат',
+      type: 'button',
+      events: {
+        click: () => {
+          const allow = confirm(
+            `Вы действительно хотите удалить чат ${this.props.currentChat.elem.props.title}?`
+          );
+          if (allow) {
+            ChatsController.deleteChat(this.props.currentChat.id as number);
+          }
         },
       },
     });
@@ -38,7 +53,7 @@ class BaseChatWindow extends Block {
     if (this.props.currentChat) {
       return this.compile(tmpl, {
         ...this.props,
-        ...this.props.currentChat.props,
+        ...this.props.currentChat.elem.props,
       });
     }
     return this.compile(tmpl, this.props);

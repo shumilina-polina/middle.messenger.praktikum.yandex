@@ -1,31 +1,30 @@
-import { HTTPTransport } from '@/core/HTTPTransport';
 import s from './chatWindow.module.scss';
-import { ENDPOINTS } from '@/types/endpoints';
 
 const chatTmpl = `
-{{id}}
-     {{{addAvatarButton}}}
-     {{#if avatar}}
-               <img class="${s.chatfeed_avatar}" src="${
-HTTPTransport.API_URL + ENDPOINTS.resources + '/'
-}{{avatar}}" alt="Avatar" />
-          {{else}}
-               <img class="${
-               s.chatfeed_avatar
-               }" src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" alt="Avatar" />
-     {{/if}}
-     {{title}}
-     {{last_message}}
-     {{unread_count}}
-     {{{popupAvatar}}}
+     <div class="${s.wrapper_data}">
+          <h2 class="${s.wrapper_data_name}">
+               {{title}}
+          </h2>
+          {{{popupAvatar}}}
+     </div>
+     <div class="${s.wrapper_buttons}">
+          {{{addAvatarButton}}}
+          {{{deleteChatButton}}}
+     </div>
 `;
 
 export const tmpl = `
-<main data-chat="{{id}}">
-     {{#if (isChatExists currentChat)}}
-          ${chatTmpl}
-          {{else}}
-          Выберите чат, чтобы отправить сообщение
-     {{/if}}
-</main>
+{{#if (isChatExists currentChat)}}
+     <main class="${s.wrapper}">
+          <div class="${s.wrapper_content}">
+               ${chatTmpl}
+          </div>
+     </main>
+     {{else}}
+     <main class="${s.wrapper} ${s.wrapper_noexist}">
+          <span>
+               Выберите чат, чтобы отправить сообщение
+          </span>
+     </main>
+{{/if}}
 `;

@@ -29,4 +29,14 @@ export class ChatsController {
       console.log('Ошибка сохранения аватара: ', err);
     }
   }
+
+  static async deleteChat(chatId: number) {
+    try {
+      await ChatsApi.deleteChat(chatId);
+      await ChatsController.fetchChats();
+      store.set('currentChat', undefined);
+    } catch (err) {
+      console.log('Ошибка удаления чата: ', err);
+    }
+  }
 }

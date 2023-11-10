@@ -18,6 +18,10 @@ class ChatsApi extends API {
   changeChatAvatar(data: FormData) {
     return this.http.put('/avatar', { data: data });
   }
+
+  deleteChat(chatId: number) {
+    return this.http.delete('', { data: { chatId: chatId } });
+  }
 }
 
 export default new ChatsApi();
