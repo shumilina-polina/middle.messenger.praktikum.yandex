@@ -9,8 +9,8 @@ export class ChatItem extends Block {
       ...props,
       events: {
         click: () => {
-          store.set('currentChat', this.props.id);
-          console.log('Выбранный чат: ', this.props.id);
+          store.set('currentChat', this);
+          console.log('Выбранный чат: ', this.props.title);
         },
       },
     });

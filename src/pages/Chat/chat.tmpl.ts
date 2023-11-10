@@ -11,22 +11,13 @@ export const tmpl = `
         </header>
         <main>
             <ul class="${s.chatfeed_list}">
-                {{{chatlist0}}}
-                {{{chatlist1}}}
-                {{{chatlist2}}}
-                {{{chatlist3}}}
-                {{{chatlist4}}}
-                {{{chatlist5}}}
-                {{{chatlist6}}}
-                {{{chatlist7}}}
-                {{{chatlist8}}}
-                {{{chatlist9}}}
+                {{{chatLists}}}
             </ul>
         </main>
     </section>
     <section class="${s.feed}">
         {{{formCreateChat}}}
-        <main>Выберите чат, чтобы отправить сообщение</main>
+        {{{chatWindow}}}
         <footer>
            {{{formMessage}}}
         </footer>

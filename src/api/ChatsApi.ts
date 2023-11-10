@@ -8,7 +8,7 @@ class ChatsApi extends API {
   }
 
   getChats() {
-    return this.http.get('/');
+    return this.http.get('', { data: { limit: '20' } });
   }
 
   createChat(data: CreateChatData) {

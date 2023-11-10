@@ -1,4 +1,3 @@
-import { chats } from './../Chat/testdata';
 import { tmpl } from './profile.tmpl';
 import { UserAvatar } from '@/components/UserAvatar';
 import Block from '@/core/Block';

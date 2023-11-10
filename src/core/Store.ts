@@ -10,7 +10,7 @@ enum StoreEvents {
 export type State = {
   user?: UserData;
   chats?: Array<Chat>;
-  currentChat?: number; //chats's id
+  currentChat?: Chat;
 };
 
 class Store extends EventBus {

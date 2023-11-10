@@ -22,7 +22,7 @@ export class PopupAvatar extends Block {
   }
 
   init() {
-    this.getContent()?.classList.add('popup-wrapper');
+    (this.getContent() as HTMLElement).classList.add('popup-wrapper');
     this.children.formAvatar = new FormAvatar({
       events: {
         submit: onSubmitAvatar,
@@ -31,10 +31,10 @@ export class PopupAvatar extends Block {
   }
 
   showPopup() {
-    this.getContent()!.classList.add('popup-wrapper-open');
+    (this.getContent() as HTMLElement).classList.add('popup-wrapper-open');
   }
   hidePopup() {
-    this.getContent()!.classList.remove('popup-wrapper-open');
+    (this.getContent() as HTMLElement).classList.remove('popup-wrapper-open');
   }
 
   render() {

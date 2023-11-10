@@ -7,7 +7,6 @@ export class ChatsController {
     try {
       const chats = await ChatsApi.getChats();
       store.set('chats', chats);
-      console.log('chats из fetchChats: ', chats);
     } catch (err) {
       console.log('Ошибка получения чатов: ', err);
     }
@@ -17,10 +16,6 @@ export class ChatsController {
     try {
       await ChatsApi.createChat(data);
       await this.fetchChats();
-
-      const { chats } = store.getState();
-      console.log('chats: ', chats);
-      console.log('ОБНОВИЛИСЬ ЧАТЫ В CREATECHAT()');
     } catch (err) {
       console.log('Ошибка создания чата: ', err);
     }
