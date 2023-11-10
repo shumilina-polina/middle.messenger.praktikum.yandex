@@ -36,8 +36,12 @@ class BaseChat extends Block {
     this.children.formCreateChat = new FormCreateChat({
       events: {
         submit: (e) => {
+          // e.preventDefault();
           // this.setProps({ chatsArray: [{ title: 'boo' }] });
           onSubmitForm(e);
+          const { chats } = store.getState();
+          console.log('chats В SUBMIT: ', chats);
+          this.setProps({ chatsArray: chats });
         },
       },
     });
@@ -51,11 +55,10 @@ class BaseChat extends Block {
   }
 
   render() {
-    // this.children.chatlist = this.props.chatsArray.map(
-    //   (chat: ChatType) => new ChatItem(chat)
-    // );
-    // console.log('this.children: ', this.children.chatlist);
-    // console.log('this.props: ', this.props.chatsArray);
+    console.log('this.props.chatsArray: ', this.props.chatsArray);
+    this.children.chatlist = this.props.chatsArray.map(
+      (chat: ChatType) => new ChatItem(chat)
+    );
     return this.compile(tmpl, this.props);
   }
 }

@@ -30,7 +30,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   try {
     await AuthController.fetchUser();
     await ChatsController.fetchChats();
-    // await ChatsController.createChat({ title: 'цветочный магазин' });
     Router.start();
     if (!isProtectedRoute) {
       Router.go(PAGES_ROUTES.chat);
