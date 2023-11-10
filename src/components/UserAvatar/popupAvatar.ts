@@ -5,6 +5,7 @@ import { onSubmitAvatar } from '../Forms/form';
 
 type PopupAvatarProps = {
   isVisible: boolean;
+  chatAvatar?: number;
 };
 
 export class PopupAvatar extends Block {
@@ -25,7 +26,7 @@ export class PopupAvatar extends Block {
     (this.getContent() as HTMLElement).classList.add('popup-wrapper');
     this.children.formAvatar = new FormAvatar({
       events: {
-        submit: onSubmitAvatar,
+        submit: (e) => onSubmitAvatar(e, this.props.chatAvatar),
       },
     });
   }

@@ -1,8 +1,18 @@
+import { HTTPTransport } from '@/core/HTTPTransport';
 import s from './chatItem.module.scss';
+import { ENDPOINTS } from '@/types/endpoints';
 
 export const tmpl = `
     <li class="${s.chatfeed}">
-        <img class="${s.chatfeed_avatar}" src={{avatar}} alt="Avatar" />
+        {{#if avatar}}
+                <img class="${s.chatfeed_avatar}" src="${
+  HTTPTransport.API_URL + ENDPOINTS.resources + '/'
+}{{avatar}}" alt="Avatar" />
+            {{else}}
+                <img class="${
+                  s.chatfeed_avatar
+                }" src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" alt="Avatar" />
+        {{/if}}
         <div class="${s.chatfeed_content}">
         <h3 class="${s.chatfeed_content__name}">{{title}}</h3>
         <p class="${s.chatfeed_content__message}">

@@ -20,4 +20,13 @@ export class ChatsController {
       console.log('Ошибка создания чата: ', err);
     }
   }
+
+  static async changeChatAvatar(data: FormData) {
+    try {
+      await ChatsApi.changeChatAvatar(data);
+      await ChatsController.fetchChats();
+    } catch (err) {
+      console.log('Ошибка сохранения аватара: ', err);
+    }
+  }
 }

@@ -8,6 +8,8 @@ import {
 import { AuthController } from '@/controller/AuthController';
 import { ChangeDataController } from '@/controller/ChangeDataController';
 import { ChatsController } from '@/controller/ChatsController';
+import Block from '@/core/Block';
+import { store } from '@/core/Store';
 import { PAGES_ROUTES } from '@/types/routes';
 
 export const onSubmitForm = (e: SubmitEvent) => {
@@ -37,7 +39,7 @@ export const onSubmitForm = (e: SubmitEvent) => {
   }
 };
 
-export const onSubmitAvatar = (e: SubmitEvent) => {
+export const onSubmitAvatar = (e: SubmitEvent, chatAvatar = undefined) => {
   e.preventDefault();
   const inputFiles = Object.values(e.target as HTMLFormElement).find(
     (field) => field.tagName === 'INPUT'
@@ -46,7 +48,12 @@ export const onSubmitAvatar = (e: SubmitEvent) => {
     const formData = new FormData();
     formData.append('avatar', inputFiles[0]);
     console.log('файл аватара: ', inputFiles[0]);
-    ChangeDataController.changeAvatar(formData as FormData);
+    if (chatAvatar) {
+      formData.append('chatId', chatAvatar);
+      ChatsController.changeChatAvatar(formData as FormData);
+    } else {
+      ChangeDataController.changeAvatar(formData as FormData);
+    }
   } else {
     alert('Необходимо загрузить файл');
   }

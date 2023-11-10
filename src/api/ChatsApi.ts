@@ -14,6 +14,10 @@ class ChatsApi extends API {
   createChat(data: CreateChatData) {
     return this.http.post('/', { data: data });
   }
+
+  changeChatAvatar(data: FormData) {
+    return this.http.put('/avatar', { data: data });
+  }
 }
 
 export default new ChatsApi();

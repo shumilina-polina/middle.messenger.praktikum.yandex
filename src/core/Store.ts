@@ -2,6 +2,7 @@ import { Chat, UserData } from '@/types/apiDataTypes';
 import { EventBus } from './EventBus';
 import set from '@/utils/set';
 import Block from './Block';
+import { ChatItem } from '@/components/ChatItem';
 
 enum StoreEvents {
   Update = 'update',
@@ -10,7 +11,7 @@ enum StoreEvents {
 export type State = {
   user?: UserData;
   chats?: Array<Chat>;
-  currentChat?: Chat;
+  currentChat?: { elem: ChatItem; id: number };
 };
 
 class Store extends EventBus {
