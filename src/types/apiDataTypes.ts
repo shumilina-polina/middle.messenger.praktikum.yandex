@@ -41,6 +41,11 @@ export type CreateChatData = {
   title: string;
 };
 
+export type AddUserToChatData = {
+  users: number[];
+  chatId: number;
+};
+
 export type Chat = {
   id: number;
   title: string;

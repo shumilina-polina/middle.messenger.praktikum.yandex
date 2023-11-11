@@ -1,8 +1,8 @@
 import { Chat } from '@/types/apiDataTypes';
 import { tmpl } from './chatItem.tmpl';
 import Block from '@/core/Block';
-import { store } from '@/core/Store';
 import Handlebars from 'handlebars';
+import { ChatsController } from '@/controller/ChatsController';
 
 export class ChatItem extends Block {
   constructor(props: Chat) {
@@ -10,8 +10,7 @@ export class ChatItem extends Block {
       ...props,
       events: {
         click: () => {
-          store.set('currentChat', { elem: this, id: this.props.id });
-          console.log('Выбранный чат: ', this.props.title);
+          ChatsController.fetchChatUsers(this.props);
         },
       },
     });

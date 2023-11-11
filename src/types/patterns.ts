@@ -4,5 +4,6 @@ export const enum INPUT_PATTERNS {
   email = '(?=.*@[A-Za-z]+\\.)(@|[A-Za-z0-9]|-|_|\\.)+',
   name = '[A-ZА-ЯЁ]([A-Za-zА-ЯЁа-яё]|-)*',
   phone = '\\+?[0-9]+',
+  addUser = '([0-9]|\\s)*',
   noPattern = '.{1,}',
 }

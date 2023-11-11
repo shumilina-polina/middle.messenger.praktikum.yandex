@@ -1,14 +1,15 @@
 import {
+  AddUserToChatData,
   ChangeData,
   ChangePassword,
   CreateChatData,
   LoginData,
   RegisterData,
+  UserData,
 } from '../../types/apiDataTypes';
 import { AuthController } from '@/controller/AuthController';
 import { ChangeDataController } from '@/controller/ChangeDataController';
 import { ChatsController } from '@/controller/ChatsController';
-import Block from '@/core/Block';
 import { store } from '@/core/Store';
 import { PAGES_ROUTES } from '@/types/routes';
 
@@ -57,6 +58,25 @@ export const onSubmitAvatar = (e: SubmitEvent, chatAvatar = undefined) => {
   } else {
     alert('Необходимо загрузить файл');
   }
+};
+
+export const onSubmitAddUser = (e: SubmitEvent) => {
+  e.preventDefault();
+  const form = e.target as HTMLFormElement;
+  const { currentChat } = store.getState();
+  let res: AddUserToChatData = {
+    users: [],
+    chatId: currentChat?.elemOptions.id,
+  };
+  let ids: Array<string> = [];
+  Object.values(form).forEach((field) => {
+    if (field.tagName === 'INPUT') {
+      ids = field.value.split(' ');
+    }
+  });
+  res.users = ids.map((elem: string) => Number(elem));
+  ChatsController.addUser(res, currentChat?.elemOptions);
+  form.reset();
 };
 
 export const onFocusInput = (e: FocusEvent) => {

@@ -11,7 +11,7 @@ enum StoreEvents {
 export type State = {
   user?: UserData;
   chats?: Array<Chat>;
-  currentChat?: { elem: ChatItem; id: number };
+  currentChat?: { elemOptions: any; chatUsers: Array<UserData> };
 };
 
 class Store extends EventBus {

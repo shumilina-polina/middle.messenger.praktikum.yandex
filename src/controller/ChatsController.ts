@@ -1,6 +1,6 @@
 import ChatsApi from '@/api/ChatsApi';
 import { store } from '@/core/Store';
-import { CreateChatData } from '@/types/apiDataTypes';
+import { AddUserToChatData, CreateChatData } from '@/types/apiDataTypes';
 
 export class ChatsController {
   static async fetchChats() {
@@ -37,6 +37,29 @@ export class ChatsController {
       store.set('currentChat', undefined);
     } catch (err) {
       console.log('Ошибка удаления чата: ', err);
+    }
+  }
+
+  static async fetchChatUsers(chat: any) {
+    try {
+      const chatId = chat.id;
+      const chatUsers = await ChatsApi.getChatUsers(chatId);
+
+      store.set('currentChat', {
+        elemOptions: chat,
+        chatUsers: chatUsers,
+      });
+    } catch (err) {
+      console.log('Ошибка получения пользователей чата: ', err);
+    }
+  }
+
+  static async addUser(data: AddUserToChatData, chat: any) {
+    try {
+      await ChatsApi.addUserToChat(data);
+      await this.fetchChatUsers(chat);
+    } catch (err) {
+      console.log('Ошибка добавления пользователя: ', err);
     }
   }
 }

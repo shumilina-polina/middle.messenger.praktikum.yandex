@@ -11,6 +11,7 @@ const chatTmpl = `
           {{{addAvatarButton}}}
           {{{deleteChatButton}}}
      </div>
+     
 `;
 
 export const tmpl = `
@@ -19,9 +20,25 @@ export const tmpl = `
           <div class="${s.wrapper_content}">
                ${chatTmpl}
           </div>
+          <div class="${s.wrapper_users}">
+               <div>
+                    <h3 class="${s.wrapper_users_label}">
+                         Участники:
+                    </h3>
+                    <ul>
+                         {{#each chatUsers}}
+                              <li>{{display_name}}</li>
+                         {{/each}}
+                    </ul>
+               </div>
+               <div>
+                    {{{formAddUser}}}
+               </div>
+          </div>
+     </div>
      </main>
      {{else}}
-     <main class="${s.wrapper} ${s.wrapper_noexist}">
+     <main class="${s.wrapper_noexist}">
           <span>
                Выберите чат, чтобы отправить сообщение
           </span>

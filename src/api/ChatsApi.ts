@@ -1,4 +1,4 @@
-import { CreateChatData } from '@/types/apiDataTypes';
+import { AddUserToChatData, CreateChatData } from '@/types/apiDataTypes';
 import { API } from './api';
 import { ENDPOINTS } from '@/types/endpoints';
 
@@ -21,6 +21,14 @@ class ChatsApi extends API {
 
   deleteChat(chatId: number) {
     return this.http.delete('', { data: { chatId: chatId } });
+  }
+
+  getChatUsers(chatId: number) {
+    return this.http.get(`/${chatId}/users`);
+  }
+
+  addUserToChat(data: AddUserToChatData) {
+    return this.http.put(`/users`, { data: data });
   }
 }
 

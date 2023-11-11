@@ -8,7 +8,7 @@ const enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: Record<string, string | number> | FormData;
+  data?: Record<string, string | number | number[]> | FormData;
   timeout?: number;
 };
 

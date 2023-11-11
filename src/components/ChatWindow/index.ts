@@ -5,6 +5,8 @@ import Block from '@/core/Block';
 import { BaseButton } from '../BaseButton';
 import { PopupAvatar } from '../UserAvatar/popupAvatar';
 import { ChatsController } from '@/controller/ChatsController';
+import { FormAddUser } from '../Forms/FormAddUser';
+import { onSubmitAddUser } from '../Forms/form';
 
 class BaseChatWindow extends Block {
   init() {
@@ -28,12 +30,17 @@ class BaseChatWindow extends Block {
       events: {
         click: () => {
           const allow = confirm(
-            `Вы действительно хотите удалить чат ${this.props.currentChat.elem.props.title}?`
+            `Вы действительно хотите удалить чат ${this.props.currentChat.elemOptions.title}?`
           );
           if (allow) {
-            ChatsController.deleteChat(this.props.currentChat.id as number);
+            ChatsController.deleteChat(this.props.currentChat.elemOptions.id);
           }
         },
+      },
+    });
+    this.children.formAddUser = new FormAddUser({
+      events: {
+        submit: onSubmitAddUser,
       },
     });
 
@@ -44,16 +51,18 @@ class BaseChatWindow extends Block {
     const { currentChat } = store.getState();
     this.children.popupAvatar = new PopupAvatar({
       isVisible: false,
-      chatAvatar: currentChat?.id,
+      chatAvatar: currentChat?.elemOptions.id,
     });
   }
 
   render() {
     this.updateCurrentChatId();
     if (this.props.currentChat) {
+      const { chatUsers, elemOptions } = this.props.currentChat;
       return this.compile(tmpl, {
         ...this.props,
-        ...this.props.currentChat.elem.props,
+        ...elemOptions,
+        chatUsers,
       });
     }
     return this.compile(tmpl, this.props);
