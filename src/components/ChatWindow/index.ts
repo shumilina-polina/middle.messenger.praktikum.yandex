@@ -5,8 +5,8 @@ import Block from '@/core/Block';
 import { BaseButton } from '../BaseButton';
 import { PopupAvatar } from '../UserAvatar/popupAvatar';
 import { ChatsController } from '@/controller/ChatsController';
-import { FormAddUser } from '../Forms/FormAddUser';
-import { onSubmitAddUser } from '../Forms/form';
+import { onSubmitUpdateUser } from '../Forms/form';
+import { FormUpdateUsers } from '../Forms/FormUpdateUser';
 
 class BaseChatWindow extends Block {
   init() {
@@ -38,9 +38,16 @@ class BaseChatWindow extends Block {
         },
       },
     });
-    this.children.formAddUser = new FormAddUser({
+    this.children.formAddUsers = new FormUpdateUsers({
+      label: 'Добавить участников:',
       events: {
-        submit: onSubmitAddUser,
+        submit: onSubmitUpdateUser,
+      },
+    });
+    this.children.formDeleteUsers = new FormUpdateUsers({
+      label: 'Удалить участников:',
+      events: {
+        submit: (e) => onSubmitUpdateUser(e, true),
       },
     });
 

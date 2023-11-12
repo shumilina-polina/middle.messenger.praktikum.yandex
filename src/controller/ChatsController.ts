@@ -54,12 +54,20 @@ export class ChatsController {
     }
   }
 
-  static async addUser(data: AddUserToChatData, chat: any) {
+  static async addUsers(data: AddUserToChatData, chat: any) {
     try {
-      await ChatsApi.addUserToChat(data);
+      await ChatsApi.addUsersToChat(data);
       await this.fetchChatUsers(chat);
     } catch (err) {
-      console.log('Ошибка добавления пользователя: ', err);
+      console.log('Ошибка добавления пользователей: ', err);
+    }
+  }
+  static async deleteUsers(data: AddUserToChatData, chat: any) {
+    try {
+      await ChatsApi.deleteUsersFromChat(data);
+      await this.fetchChatUsers(chat);
+    } catch (err) {
+      console.log('Ошибка удаления пользователей: ', err);
     }
   }
 }

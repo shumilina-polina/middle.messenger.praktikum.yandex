@@ -60,7 +60,10 @@ export const onSubmitAvatar = (e: SubmitEvent, chatAvatar = undefined) => {
   }
 };
 
-export const onSubmitAddUser = (e: SubmitEvent) => {
+export const onSubmitUpdateUser = (
+  e: SubmitEvent,
+  isDelete: boolean = false
+) => {
   e.preventDefault();
   const form = e.target as HTMLFormElement;
   const { currentChat } = store.getState();
@@ -75,7 +78,9 @@ export const onSubmitAddUser = (e: SubmitEvent) => {
     }
   });
   res.users = ids.map((elem: string) => Number(elem));
-  ChatsController.addUser(res, currentChat?.elemOptions);
+  isDelete
+    ? ChatsController.deleteUsers(res, currentChat?.elemOptions)
+    : ChatsController.addUsers(res, currentChat?.elemOptions);
   form.reset();
 };
 

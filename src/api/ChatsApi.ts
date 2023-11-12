@@ -27,8 +27,12 @@ class ChatsApi extends API {
     return this.http.get(`/${chatId}/users`);
   }
 
-  addUserToChat(data: AddUserToChatData) {
+  addUsersToChat(data: AddUserToChatData) {
     return this.http.put(`/users`, { data: data });
+  }
+
+  deleteUsersFromChat(data: AddUserToChatData) {
+    return this.http.delete(`/users`, { data: data });
   }
 }
 

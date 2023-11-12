@@ -2,6 +2,16 @@ import s from './chatWindow.module.scss';
 
 const chatTmpl = `
      <div class="${s.wrapper_data}">
+          <div class="${s.wrapper_users}">
+               <h3 class="${s.wrapper_users_label}">
+                    Участники:
+               </h3>
+               <ul>
+                    {{#each chatUsers}}
+                         <li>{{first_name}}</li>
+                    {{/each}}
+               </ul>
+          </div>
           <h2 class="${s.wrapper_data_name}">
                {{title}}
           </h2>
@@ -20,20 +30,9 @@ export const tmpl = `
           <div class="${s.wrapper_content}">
                ${chatTmpl}
           </div>
-          <div class="${s.wrapper_users}">
-               <div>
-                    <h3 class="${s.wrapper_users_label}">
-                         Участники:
-                    </h3>
-                    <ul>
-                         {{#each chatUsers}}
-                              <li>{{display_name}}</li>
-                         {{/each}}
-                    </ul>
-               </div>
-               <div>
-                    {{{formAddUser}}}
-               </div>
+          <div class="${s.wrapper_forms}">
+               {{{formDeleteUsers}}}
+               {{{formAddUsers}}}
           </div>
      </div>
      </main>
