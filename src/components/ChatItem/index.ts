@@ -10,7 +10,7 @@ export class ChatItem extends Block {
       ...props,
       events: {
         click: () => {
-          ChatsController.fetchChatUsers(this.props);
+          ChatsController.fetchWSToken(this.props);
         },
       },
     });

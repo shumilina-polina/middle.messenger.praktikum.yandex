@@ -33,9 +33,10 @@ export const tmpl = `
           <div class="${s.wrapper_forms}">
                {{{formDeleteUsers}}}
                {{{formAddUsers}}}
-          </div>
-     </div>
-     </main>
+               </div>
+               </div>
+               </main>
+               токен: {{token}}
      {{else}}
      <main class="${s.wrapper_noexist}">
           <span>

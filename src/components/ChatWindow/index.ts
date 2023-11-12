@@ -56,20 +56,22 @@ class BaseChatWindow extends Block {
 
   updateCurrentChatId() {
     const { currentChat } = store.getState();
+    console.log('currentChat: ', currentChat);
     this.children.popupAvatar = new PopupAvatar({
       isVisible: false,
-      chatAvatar: currentChat?.elemOptions.id,
+      chatAvatar: currentChat?.elemOptions?.id,
     });
   }
 
   render() {
     this.updateCurrentChatId();
     if (this.props.currentChat) {
-      const { chatUsers, elemOptions } = this.props.currentChat;
+      const { chatUsers, elemOptions, token } = this.props.currentChat;
       return this.compile(tmpl, {
         ...this.props,
         ...elemOptions,
         chatUsers,
+        token,
       });
     }
     return this.compile(tmpl, this.props);

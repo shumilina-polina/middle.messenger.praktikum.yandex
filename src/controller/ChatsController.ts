@@ -70,4 +70,16 @@ export class ChatsController {
       console.log('Ошибка удаления пользователей: ', err);
     }
   }
+  static async fetchWSToken(chat: any) {
+    try {
+      await this.fetchChatUsers(chat);
+
+      const { token } = (await ChatsApi.getWSToken(chat.id)) as {
+        token: string;
+      };
+      store.set('currentChat.token', token);
+    } catch (err) {
+      console.log('Ошибка удаления пользователей: ', err);
+    }
+  }
 }

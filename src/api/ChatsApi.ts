@@ -34,6 +34,10 @@ class ChatsApi extends API {
   deleteUsersFromChat(data: AddUserToChatData) {
     return this.http.delete(`/users`, { data: data });
   }
+
+  getWSToken(chatId: number) {
+    return this.http.post(`/token/${chatId}`);
+  }
 }
 
 export default new ChatsApi();
