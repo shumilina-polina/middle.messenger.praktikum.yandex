@@ -20,6 +20,7 @@ export class AuthController {
     try {
       await AuthApi.login(data);
       await this.fetchUser(); // set user in store
+      await ChatsController.fetchChats();
       Router.go(PAGES_ROUTES.chat);
     } catch (err) {
       console.log('Ошибка входа: ', err);
