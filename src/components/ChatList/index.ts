@@ -24,7 +24,10 @@ class BaseChatList extends Block {
 }
 
 function mapStateToProps(state: State) {
-  return { chats: state.chats };
+  return {
+    chats: state.chats,
+    currentChat: { oldMessages: state.currentChat?.oldMessages },
+  };
 }
 
 export const ChatList = withStore(mapStateToProps)(BaseChatList);

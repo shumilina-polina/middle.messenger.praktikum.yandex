@@ -1,6 +1,7 @@
 import ChatsApi from '@/api/ChatsApi';
 import { store } from '@/core/Store';
 import { AddUserToChatData, CreateChatData } from '@/types/apiDataTypes';
+import { ChatWSController } from './ChatWSController';
 
 export class ChatsController {
   static async fetchChats() {
@@ -73,13 +74,13 @@ export class ChatsController {
   static async fetchWSToken(chat: any) {
     try {
       await this.fetchChatUsers(chat);
-
-      const { token } = (await ChatsApi.getWSToken(chat.id)) as {
+      const chatId = chat.id;
+      const { token } = (await ChatsApi.getWSToken(chatId)) as {
         token: string;
       };
-      store.set('currentChat.token', token);
+      ChatWSController.openWS(chatId, token);
     } catch (err) {
-      console.log('Ошибка удаления пользователей: ', err);
+      console.log('Ошибка получения токена: ', err);
     }
   }
 }

@@ -65,3 +65,8 @@ export type Chat = {
     content: string;
   };
 };
+
+export type Message = {
+  content: string;
+  type?: string;
+};

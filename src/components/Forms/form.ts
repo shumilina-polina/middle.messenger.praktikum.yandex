@@ -1,3 +1,4 @@
+import { Message } from './../../types/apiDataTypes';
 import {
   AddUserToChatData,
   ChangeData,
@@ -5,10 +6,10 @@ import {
   CreateChatData,
   LoginData,
   RegisterData,
-  UserData,
 } from '../../types/apiDataTypes';
 import { AuthController } from '@/controller/AuthController';
 import { ChangeDataController } from '@/controller/ChangeDataController';
+import { ChatWSController } from '@/controller/ChatWSController';
 import { ChatsController } from '@/controller/ChatsController';
 import { store } from '@/core/Store';
 import { PAGES_ROUTES } from '@/types/routes';
@@ -33,6 +34,9 @@ export const onSubmitForm = (e: SubmitEvent) => {
       break;
     case 'create-chat':
       ChatsController.createChat(data as CreateChatData);
+      break;
+    case 'send-message':
+      ChatWSController.sendMessage(data as Message);
       break;
     default:
       console.log('неизвестная форма');

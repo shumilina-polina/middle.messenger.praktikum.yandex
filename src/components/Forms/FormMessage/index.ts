@@ -3,16 +3,18 @@ import { tmpl } from './formMessage.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import s from './formMessage.module.scss';
 import { INPUT_PATTERNS } from '@/types/patterns';
+import { BaseButton } from '@/components/BaseButton';
+import { onSubmitForm } from '../form';
+import { State, store, withStore } from '@/core/Store';
 
-type FormMessageProps = {
-  events?: {
-    submit: (e: SubmitEvent) => void;
-  };
-};
-
-export class FormMessage extends Block {
-  constructor(props: FormMessageProps) {
-    super('div', props);
+class BaseFormMessage extends Block {
+  constructor(props: any) {
+    super('div', {
+      ...props,
+      events: {
+        submit: onSubmitForm,
+      },
+    });
   }
 
   init() {
@@ -22,14 +24,30 @@ export class FormMessage extends Block {
       label: 'Сообщение',
       input_id: 'feed-text',
       input_type: 'text',
-      input_name: 'message',
+      input_name: 'content',
       is_required: true,
       minLenght: 1,
       pattern: INPUT_PATTERNS.noPattern,
     });
+    this.children.sendButton = new BaseButton({
+      text: '',
+      type: 'submit',
+    });
   }
 
   render() {
-    return this.compile(tmpl, this.props);
+    const { currentChat } = store.getState();
+    let disabled_class = '';
+    if (!currentChat) {
+      disabled_class = 'disabled_form';
+    }
+
+    return this.compile(tmpl, { ...this.props, disabled_class });
   }
 }
+
+const mapStateToProps = (state: State) => ({
+  currentChat: state.currentChat,
+});
+
+export const FormMessage = withStore(mapStateToProps)(BaseFormMessage);

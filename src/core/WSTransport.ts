@@ -1,4 +1,5 @@
 import { EventBus } from './EventBus';
+import { store } from './Store';
 
 const enum EVENTS {
   Error = 'error',
@@ -8,15 +9,15 @@ const enum EVENTS {
 }
 
 export class WSTransport extends EventBus {
-  private readonly WS_URL = 'wss://ya-praktikum.tech/ws/chats/';
+  private readonly WS_URL = 'wss://ya-praktikum.tech/ws';
   private socket?: WebSocket;
   private pingInterval?: ReturnType<typeof setInterval>;
   private readonly pingIntervalTime = 30000; //интервал между пингами
-  private url: string;
+  private endpoint: string;
 
-  constructor(url: string) {
+  constructor(endpoint: string) {
     super();
-    this.url = url;
+    this.endpoint = endpoint;
   }
 
   public send(data: string | number | object) {
@@ -27,14 +28,15 @@ export class WSTransport extends EventBus {
     this.socket.send(JSON.stringify(data));
   }
 
-  public connect(): Promise<void> {
+  public connect(url: string): Promise<void> {
     if (this.socket) {
       throw new Error('Socket уже присоединён');
     }
 
-    this.socket = new WebSocket(this.WS_URL + this.url);
+    this.socket = new WebSocket(this.WS_URL + this.endpoint + url);
     this.subscribe(this.socket);
     this.setupPing();
+    // this.listenMessage();
 
     return new Promise((resolve, rej) => {
       this.on(EVENTS.Error, rej);
@@ -47,6 +49,7 @@ export class WSTransport extends EventBus {
 
   public close() {
     this.socket?.close();
+    this.socket = undefined;
     clearInterval(this.pingInterval);
   }
 
@@ -60,6 +63,16 @@ export class WSTransport extends EventBus {
       this.pingInterval = undefined;
     });
   }
+
+  // private listenMessage() {
+  //   const func = (data: any) => {
+  //     console.log('Получено сообщение: ', data.content);
+  //   };
+  //   this.on(EVENTS.Message, func);
+  //   this.on(EVENTS.Close, () => {
+  //     this.off(EVENTS.Message, func);
+  //   });
+  // }
 
   private subscribe(socket: WebSocket) {
     socket.addEventListener('open', () => {
@@ -78,7 +91,12 @@ export class WSTransport extends EventBus {
           return;
         }
         this.emit(EVENTS.Message, data);
-      } catch (error) {}
+        if (Array.isArray(data)) {
+          store.set('currentChat.oldMessages', data);
+        }
+      } catch (error) {
+        console.log('ошибка: ', error);
+      }
     });
   }
 }
