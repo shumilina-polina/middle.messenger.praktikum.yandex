@@ -62,6 +62,7 @@ function cloneDeep<T extends object = object>(obj: T) {
       // Handle:
       // * Object.symbol
       Object.getOwnPropertySymbols(item).forEach((s: any) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         return (copy[s] = _cloneDeep(item[s]));
       });
@@ -69,6 +70,7 @@ function cloneDeep<T extends object = object>(obj: T) {
       // Handle:
       // * Object.name (other)
       Object.keys(item).forEach((k) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         return (copy[k] = _cloneDeep(item[k]));
       });
