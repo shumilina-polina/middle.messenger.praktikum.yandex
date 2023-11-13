@@ -1,13 +1,15 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmpl } from './formUserData.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import { INPUT_PATTERNS } from '@/types/patterns';
 import s from './formUserData.module.scss';
 import { BaseButton } from '@/components/BaseButton';
+import { store } from '@/core/Store';
 
 type FormUserDataProps = {
   disabled: boolean;
   changePassword?: boolean;
+  type?: string;
   events?: {
     submit: (e: SubmitEvent) => void;
   };
@@ -21,12 +23,13 @@ export class FormUserData extends Block {
   init() {
     const { children, props } = this;
     if (props.changePassword) {
+      this.setProps({ type: 'user-change-password' });
       children.inputOldPassword = new InputWrapper({
         input_id: 'profile-password-old',
         input_name: 'oldPassword',
         input_type: 'password',
         label: 'Старый пароль',
-        placeholder: '',
+        value: '',
         is_required: true,
         minLenght: 1,
         pattern: INPUT_PATTERNS.password,
@@ -36,7 +39,7 @@ export class FormUserData extends Block {
         input_name: 'newPassword',
         input_type: 'password',
         label: 'Новый пароль',
-        placeholder: '',
+        value: '',
         is_required: true,
         minLenght: 1,
         pattern: INPUT_PATTERNS.password,
@@ -46,19 +49,21 @@ export class FormUserData extends Block {
         input_name: 'newPassword',
         input_type: 'password',
         label: 'Повторите новый пароль',
-        placeholder: '',
+        value: '',
         is_required: true,
         minLenght: 1,
         pattern: INPUT_PATTERNS.password,
       });
     } else {
+      this.setProps({ type: 'user-change-data' });
+      const { user } = store.getState();
       children.inputEmail = new InputWrapper({
         class: props.disabled && s.disabled,
         input_id: 'user-email',
         input_type: 'email',
         input_name: 'email',
         label: 'Почта',
-        placeholder: 'pochta@yandex.ru',
+        value: user?.email || '',
         is_required: true,
         minLenght: 1,
         pattern: INPUT_PATTERNS.email,
@@ -69,7 +74,7 @@ export class FormUserData extends Block {
         input_type: 'text',
         input_name: 'login',
         label: 'Логин',
-        placeholder: 'polinashumilina',
+        value: user?.login || '',
         is_required: true,
         minLenght: 3,
         maxLenght: 20,
@@ -81,7 +86,7 @@ export class FormUserData extends Block {
         input_type: 'text',
         input_name: 'first_name',
         label: 'Имя',
-        placeholder: 'Полина',
+        value: user?.first_name || '',
         is_required: true,
         minLenght: 1,
         maxLenght: 30,
@@ -93,7 +98,7 @@ export class FormUserData extends Block {
         input_type: 'text',
         input_name: 'second_name',
         label: 'Фамилия',
-        placeholder: 'Шумилина',
+        value: user?.second_name || '',
         is_required: true,
         minLenght: 1,
         maxLenght: 30,
@@ -104,8 +109,8 @@ export class FormUserData extends Block {
         input_id: 'user-display-name',
         input_type: 'text',
         input_name: 'display_name',
-        label: 'Имя в чате',
-        placeholder: 'Полинка',
+        label: 'Имя в чате',
+        placeholder: user?.display_name || 'Установите имя для чатов',
         is_required: true,
         minLenght: 1,
         maxLenght: 30,
@@ -117,7 +122,7 @@ export class FormUserData extends Block {
         input_type: 'phone',
         input_name: 'phone',
         label: 'Телефон',
-        placeholder: '+7 (909) 967-30-30',
+        value: user?.phone || '',
         is_required: true,
         minLenght: 10,
         maxLenght: 15,

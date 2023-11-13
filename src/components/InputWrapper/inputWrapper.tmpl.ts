@@ -12,6 +12,7 @@ export const tmpl = `
         name="{{input_name}}"
         placeholder="{{placeholder}}"
         required="{{is_required}}"
+        value="{{value}}"
         minlength="{{minLenght}}"
         maxlength="{{maxLenght}}"
         pattern="{{pattern}}"

@@ -2,6 +2,8 @@ import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
 import { EventBus } from './EventBus';
+import cloneDeep from '@/utils/cloneDeep';
+import isEqual from '@/utils/isEqual';
 
 // Нельзя создавать экземпляр данного класса
 class Block<P extends Record<string, any> = any> {
@@ -14,10 +16,12 @@ class Block<P extends Record<string, any> = any> {
 
   public id = nanoid(6);
   protected props: P;
-  public children: Record<string, Block>;
+  public children: Record<string, Block | Array<Block>>;
   private eventBus: () => EventBus;
-  private _element: HTMLElement | null = null;
-  private _meta: { tagName: string; props: P };
+
+  private _element: HTMLElement | null | DocumentFragment = null;
+
+  private _meta: { tagName?: string; props?: object };
 
   /** JSDoc
    * @param {string} tagName
@@ -73,7 +77,23 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
-  _registerEvents(eventBus: EventBus) {
+  _removeEvents() {
+    const { events = {} } = this.props as P & {
+      events: Record<string, () => void>;
+    };
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _findInputInParent(
+    parent: HTMLElement | null | DocumentFragment
+  ): HTMLInputElement | HTMLTextAreaElement | null | undefined {
+    return parent?.querySelector('input') || parent?.querySelector('textarea');
+  }
+
+  _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -82,7 +102,9 @@ class Block<P extends Record<string, any> = any> {
 
   _createResources() {
     const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    this._element = tagName
+      ? document.createElement(tagName)
+      : document.createDocumentFragment();
   }
 
   private _init() {
@@ -104,9 +126,15 @@ class Block<P extends Record<string, any> = any> {
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-    Object.values(this.children).forEach((child) =>
-      child.dispatchComponentDidMount()
-    );
+    Object.values(this.children).forEach((child) => {
+      if (!Array.isArray(child)) {
+        child.dispatchComponentDidMount();
+      } else {
+        child.forEach((arrayChild) => {
+          arrayChild.dispatchComponentDidMount();
+        });
+      }
+    });
   }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -116,7 +144,7 @@ class Block<P extends Record<string, any> = any> {
   }
 
   protected componentDidUpdate(_oldProps: P, _newProps: P) {
-    return true;
+    return !isEqual(_oldProps, _newProps);
   }
 
   setProps = (nextProps: P) => {
@@ -134,38 +162,52 @@ class Block<P extends Record<string, any> = any> {
   private _render() {
     const fragment = this.render();
 
-    this._element!.innerHTML = '';
+    this._removeEvents();
+    (this._element as HTMLElement).innerHTML = '';
 
     this._element!.append(fragment);
 
     this._addEvents();
   }
 
-  protected compile(template: string, context: any) {
+  protected compile(template: string, context: any): DocumentFragment {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      contextAndStubs[name] = `<div data-id="${
+        (component as Block).id
+      }"></div>`;
     });
 
     const html = Handlebars.compile(template)(contextAndStubs);
-
     const temp = document.createElement('template');
 
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach(([_, component]) => {
-      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+    Object.entries(this.children).forEach(([_, components]) => {
+      const stub = temp.content.querySelector(
+        `[data-id="${(components as Block).id}"]`
+      );
 
       if (!stub) {
         return;
       }
 
-      component.getContent()?.append(...Array.from(stub.childNodes));
+      if (!Array.isArray(components)) {
+        stub.replaceWith(components.getContent()!);
+      } else {
+        const fragment = document.createDocumentFragment();
 
-      stub.replaceWith(component.getContent()!);
+        components.forEach((component) => {
+          const content = component.getContent();
+          if (content) {
+            fragment.appendChild(content);
+          }
+        });
+
+        stub.replaceWith(fragment);
+      }
     });
-
     return temp.content;
   }
 
@@ -185,12 +227,14 @@ class Block<P extends Record<string, any> = any> {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop: string, value) {
-        const oldTarget = { ...target };
+      set(target, prop: string, value): boolean {
+        const cloneOldTarget = cloneDeep(target);
 
-        target[prop as keyof P] = value;
+        const newTarget = target;
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        newTarget[prop as keyof P] = value;
+
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, newTarget, cloneOldTarget);
         return true;
       },
       deleteProperty() {
@@ -199,16 +243,18 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    return document.createElement(tagName);
+  _createDocumentElement(tagName: string): HTMLElement | DocumentFragment {
+    return tagName
+      ? document.createElement(tagName)
+      : document.createDocumentFragment();
   }
 
-  show() {
-    this.getContent()!.style.display = 'block';
+  show(): void {
+    (this.getContent() as HTMLElement)!.style.display = 'block';
   }
 
-  hide() {
-    this.getContent()!.style.display = 'none';
+  hide(): void {
+    (this.getContent() as HTMLElement)!.style.display = 'none';
   }
 }
 

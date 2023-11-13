@@ -1,4 +1,4 @@
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { tmpl } from './formRegister.tmpl';
 import { InputWrapper } from '@/components/InputWrapper';
 import { BaseButton } from '@/components/BaseButton';
@@ -78,8 +78,8 @@ export class FormRegister extends Block {
       input_type: 'password',
       input_name: 'password',
       is_required: true,
-      minLenght: 2,
-      maxLenght: 30,
+      minLenght: 8,
+      maxLenght: 40,
       pattern: INPUT_PATTERNS.password,
     });
     this.children.inputDoublePassword = new InputWrapper({
@@ -89,8 +89,8 @@ export class FormRegister extends Block {
       input_type: 'password',
       input_name: 'password',
       is_required: true,
-      minLenght: 2,
-      maxLenght: 30,
+      minLenght: 8,
+      maxLenght: 40,
       pattern: INPUT_PATTERNS.password,
     });
 

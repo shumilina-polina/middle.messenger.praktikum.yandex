@@ -1,8 +1,9 @@
 import { tmplNotFound, tmplServerError } from './notFound.tmpl';
 import { LayoutTitle } from '@/components/LayoutTitle';
-import { LinkForm } from '@/components/LinkForm';
+import { Link } from '@/components/Link';
 import { PAGES_ROUTES } from '@/types/routes';
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
+import Router from '@/core/Router';
 
 export class NotFound extends Block {
   constructor() {
@@ -34,7 +35,9 @@ export class ServerError extends Block {
   }
 }
 
-const BackLink = new LinkForm({
-  text: 'Назад к чатам',
-  url: PAGES_ROUTES.chat,
+const BackLink = new Link({
+  text: 'Назад к чатам',
+  events: {
+    click: () => Router.go(PAGES_ROUTES.chat),
+  },
 });

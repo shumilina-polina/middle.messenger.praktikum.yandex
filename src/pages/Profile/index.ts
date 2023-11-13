@@ -1,93 +1,83 @@
-import { tmpl, tmplChange } from './profile.tmpl';
-import { BaseButton } from '@/components/BaseButton';
+import { tmpl } from './profile.tmpl';
 import { UserAvatar } from '@/components/UserAvatar';
-import Block from '@/utils/Block';
+import Block from '@/core/Block';
 import { FormUserData } from '@/components/Forms/FormUserData';
-import { checkPasswordMatching, onSubmitForm } from '@/components/Forms/form';
+import { Link } from '@/components/Link';
+import { PAGES_ROUTES } from '@/types/routes';
+import s from './profile.module.scss';
+import Router from '@/core/Router';
+import { AuthController } from '@/controller/AuthController';
+import { State, store, withStore } from '@/core/Store';
+import { HTTPTransport } from '@/core/HTTPTransport';
+import { ENDPOINTS } from '@/types/endpoints';
 
-const onClickAvatar = () => {
-  const popupAvatar = document.querySelector('.popup-avatar');
-  popupAvatar?.classList.add('popup-open');
-  const onClick = (e: Event) => {
-    if (e.target === e.currentTarget) {
-      e.stopPropagation();
-      popupAvatar?.classList.remove('popup-open');
-      popupAvatar?.removeEventListener('click', onClick);
-    }
-  };
-  popupAvatar?.addEventListener('click', onClick);
-};
+export const setAvatar = (avatar: string | undefined) => ({
+  imageUrl: HTTPTransport.API_URL + ENDPOINTS.resources + avatar || '',
+});
 
-const avatarOptions = {
-  imageUrl:
-    'https://s.mediasole.ru/cache/content/data/images/2061/2061700/original.jpg',
-  events: {
-    click: onClickAvatar,
-  },
-};
-
-export class Profile extends Block {
+class BaseProfile extends Block {
   constructor() {
     super('div', {});
   }
 
   init() {
-    this.children.avatar = new UserAvatar(avatarOptions);
+    const { user } = store.getState();
+    this.setProps({ userName: user?.first_name + ' ' + user?.second_name });
+    this.children.logoutLink = new Link({
+      text: 'Выйти',
+      className: s.links_item__link_logout,
+      events: {
+        click: () => {
+          AuthController.logout();
+        },
+      },
+    });
+
+    this.children.changeDataLink = new Link({
+      text: 'Изменить данные',
+      events: {
+        click: () => Router.go(PAGES_ROUTES.profileChangeData),
+      },
+    });
+
+    this.children.changePasswordLink = new Link({
+      text: 'Изменить пароль',
+      events: {
+        click: () => Router.go(PAGES_ROUTES.profileChangePassword),
+      },
+    });
+
+    this.children.backLink = backLink;
+    this.children.avatar = new UserAvatar(setAvatar(user?.avatar));
     this.children.formDisabled = new FormUserData({
       disabled: true,
     });
   }
+
+  componentDidMount(): void {
+    AuthController.fetchUser();
+  }
+
   render() {
     return this.compile(tmpl, this.props);
   }
 }
 
-export class ProfileChangeData extends Block {
-  constructor() {
-    super('div', {});
-  }
+export const backLink = new Link({
+  text: '',
+  events: {
+    click: () => Router.go(PAGES_ROUTES.chat),
+  },
+  className: s.prev_link,
+});
 
-  init() {
-    this.children.avatar = new UserAvatar(avatarOptions);
-    this.children.formActive = new FormUserData({
-      events: {
-        submit: onSubmitForm,
-      },
-      disabled: false,
-    });
-    this.children.saveButton = new BaseButton({
-      text: 'Сохранить',
-      type: 'button',
-    });
-  }
-  render() {
-    return this.compile(tmplChange, this.props);
-  }
-}
+const mapStateToProps = (state: State) => ({
+  first_name: state.user?.first_name,
+  second_name: state.user?.second_name,
+  display_name: state.user?.display_name,
+  login: state.user?.login,
+  phone: state.user?.phone,
+  email: state.user?.email,
+});
 
-export class ProfileChangePassword extends Block {
-  constructor() {
-    super('div', {});
-  }
-
-  init() {
-    this.children.avatar = new UserAvatar(avatarOptions);
-    this.children.formActive = new FormUserData({
-      disabled: false,
-      changePassword: true,
-      events: {
-        submit: (e) => {
-          checkPasswordMatching(e.target as HTMLFormElement);
-          onSubmitForm(e);
-        },
-      },
-    });
-    this.children.saveButton = new BaseButton({
-      text: 'Сохранить',
-      type: 'button',
-    });
-  }
-  render() {
-    return this.compile(tmplChange, this.props);
-  }
-}
+export const Profile = withStore(mapStateToProps)(BaseProfile);

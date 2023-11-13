@@ -8,8 +8,6 @@ html:focus-within {
 
 body {
   text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -22,11 +20,6 @@ body {
 ::after,
 ::before {
   box-sizing: border-box;
-}
-
-a:not([class]) {
-  text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
 }
 
 a,
@@ -118,6 +111,11 @@ video {
   vertical-align: baseline;
 }
 
+a:not([class]) {
+  text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
+}
+
 :focus {
   outline: 0;
 }
@@ -173,11 +171,9 @@ input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-results-button,
 input[type='search']::-webkit-search-results-decoration {
   appearance: none;
-  appearance: none;
 }
 
 input[type='search'] {
-  appearance: none;
   appearance: none;
 }
 

@@ -13,33 +13,20 @@ export class EventBus<
     event: Event,
     callback: Handler<Args[Event]>
   ) {
-    if (!this.listeners[event]) {
-      this.listeners[event] = [];
-    }
-
-    this.listeners[event]?.push(callback);
+    const events = this.listeners[event] ?? [];
+    events.push(callback);
+    this.listeners[event] = events;
   }
 
   off<Event extends MapInterface<E>>(
     event: Event,
     callback: Handler<Args[Event]>
   ) {
-    if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
-    }
-
-    this.listeners[event] = this.listeners[event]!.filter(
-      (listener) => listener !== callback
-    );
+    this.listeners[event] =
+      this.listeners[event]?.filter((listener) => listener !== callback) ?? [];
   }
 
   emit<Event extends MapInterface<E>>(event: Event, ...args: Args[Event]) {
-    if (!this.listeners[event]) {
-      throw new Event(`Нет события: ${event}`);
-    }
-
-    this.listeners[event]!.forEach((listener) => {
-      listener(...args);
-    });
+    this.listeners[event]?.forEach((listener) => listener(...args));
   }
 }
