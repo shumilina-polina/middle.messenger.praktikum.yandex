@@ -17,9 +17,10 @@
   }
 
   & .avatar {
-    height: 100%;
     aspect-ratio: 1/1;
     max-width: 47px;
+    width: 47px;
+    height: 47px;
     border-radius: 100%;
     background-color: #efefef;
   }
@@ -29,17 +30,21 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+
     & .content {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+      text-align: left;
       gap: 10px;
+
       & .name {
         color: #1e1e1e;
         font-size: 13px;
         font-weight: 600;
         margin-bottom: 4px;
       }
+
       & .time {
         color: #999;
         text-align: right;
@@ -66,6 +71,7 @@
         -moz-box-orient: vertical;
         -webkit-box-orient: vertical;
         box-orient: vertical;
+
         & > span {
           color: #3369f3;
         }

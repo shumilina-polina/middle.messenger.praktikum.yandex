@@ -5,7 +5,7 @@ import { ENDPOINTS } from '@/types/endpoints';
 const avatar = `
 {{#if avatar}}
                 <img class="${s.avatar}" src="${
-  HTTPTransport.API_URL + ENDPOINTS.resources + '/'
+  HTTPTransport.API_URL + ENDPOINTS.resources
 }{{avatar}}" alt="Avatar" />
             {{else}}
                 <img class="${

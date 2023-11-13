@@ -70,3 +70,21 @@ export type Message = {
   content: string;
   type?: string;
 };
+
+export type OldMessage = {
+  chat_id: number;
+  time: string | Date;
+  type: string;
+  user_id: string;
+  content: string;
+  isAdmin?: boolean;
+  file?: {
+    id: number;
+    user_id: number;
+    path: string;
+    filename: string;
+    content_type: string;
+    content_size: number;
+    upload_date: string;
+  };
+};

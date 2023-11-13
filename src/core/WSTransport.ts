@@ -93,6 +93,11 @@ export class WSTransport extends EventBus {
         this.emit(EVENTS.Message, data);
         if (Array.isArray(data)) {
           store.set('currentChat.oldMessages', data);
+        } else if (data.type === 'message') {
+          this.send({
+            content: '0',
+            type: 'get old',
+          });
         }
       } catch (error) {
         console.log('ошибка: ', error);

@@ -1,5 +1,4 @@
 import AuthApi from '@/api/AuthApi';
-import ChatsApi from '@/api/ChatsApi';
 import Router from '@/core/Router';
 import { store } from '@/core/Store';
 import { LoginData, RegisterData } from '@/types/apiDataTypes';
@@ -11,8 +10,8 @@ export class AuthController {
     try {
       const user = await AuthApi.getUser();
       store.set('user', user);
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      throw new Error(err);
     }
   }
 

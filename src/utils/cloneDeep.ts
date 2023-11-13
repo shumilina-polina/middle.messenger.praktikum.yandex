@@ -27,9 +27,9 @@ function cloneDeep<T extends object = object>(obj: T) {
     // Handle:
     // * Array
     if (item instanceof Array) {
-      let copy: any = [];
+      const copy: GenericObject = [];
 
-      item.forEach((_, i) => ((copy as any)[i] = _cloneDeep(item[i])));
+      item.forEach((_, i) => (copy[i] = _cloneDeep(item[i])));
 
       return copy;
     }
@@ -37,7 +37,7 @@ function cloneDeep<T extends object = object>(obj: T) {
     // Handle:
     // * Set
     if (item instanceof Set) {
-      let copy = new Set();
+      const copy = new Set();
 
       item.forEach((v) => copy.add(_cloneDeep(v)));
 
@@ -47,7 +47,7 @@ function cloneDeep<T extends object = object>(obj: T) {
     // Handle:
     // * Map
     if (item instanceof Map) {
-      let copy = new Map();
+      const copy = new Map();
 
       item.forEach((v, k) => copy.set(k, _cloneDeep(v)));
 
@@ -57,7 +57,7 @@ function cloneDeep<T extends object = object>(obj: T) {
     // Handle:
     // * Object
     if (item instanceof Object) {
-      let copy: any = {};
+      const copy: any = {};
 
       // Handle:
       // * Object.symbol

@@ -71,7 +71,7 @@ export const onSubmitUpdateUser = (
   e.preventDefault();
   const form = e.target as HTMLFormElement;
   const { currentChat } = store.getState();
-  let res: AddUserToChatData = {
+  const res: AddUserToChatData = {
     users: [],
     chatId: currentChat?.elemOptions.id,
   };

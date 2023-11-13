@@ -7,6 +7,7 @@ import { PopupAvatar } from '../UserAvatar/popupAvatar';
 import { ChatsController } from '@/controller/ChatsController';
 import { onSubmitUpdateUser } from '../Forms/form';
 import { FormUpdateUsers } from '../Forms/FormUpdateUser';
+import { Messages } from '../Messages';
 
 class BaseChatWindow extends Block {
   init() {
@@ -50,6 +51,7 @@ class BaseChatWindow extends Block {
         submit: (e) => onSubmitUpdateUser(e, true),
       },
     });
+    this.children.messages = new Messages({});
 
     this.updateCurrentChatId();
   }
@@ -65,12 +67,11 @@ class BaseChatWindow extends Block {
   render() {
     this.updateCurrentChatId();
     if (this.props.currentChat) {
-      const { chatUsers, elemOptions, oldMessages } = this.props.currentChat;
+      const { chatUsers, elemOptions } = this.props.currentChat;
       return this.compile(tmpl, {
         ...this.props,
         ...elemOptions,
         chatUsers,
-        oldMessages,
       });
     }
     return this.compile(tmpl, this.props);

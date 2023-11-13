@@ -1,13 +1,14 @@
 .form {
   display: flex;
   flex-direction: column;
+
   & > div:last-child button {
     margin-top: 40px;
   }
+
   & > div > div {
     padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
-
     display: grid;
     grid-template-columns: 2fr 5fr;
     font-size: 13px;
@@ -20,8 +21,9 @@
       color: #999;
       width: 80%;
     }
+
     & > input[type='password'] {
-      border: 1px solid rgba(128, 128, 128, 0.349);
+      border: 1px solid rgb(128 128 128 / 34.9%);
     }
 
     & > label {
@@ -32,6 +34,7 @@
     }
   }
 }
+
 .disabled {
   pointer-events: none;
   background-color: inherit;

@@ -1,18 +1,3 @@
-.button {
-  width: 130px;
-  height: 130px;
-  border-radius: 100%;
-  background-color: var(--color-gray);
-  overflow: hidden;
-  position: relative;
-
-  &:hover {
-    .overlay {
-      opacity: 1;
-    }
-  }
-}
-
 .overlay {
   position: absolute;
   inset: 0;
@@ -28,6 +13,21 @@
     text-align: center;
     font-size: 13px;
     font-weight: 500;
+  }
+}
+
+.button {
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  background-color: var(--color-gray);
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    .overlay {
+      opacity: 1;
+    }
   }
 }
 

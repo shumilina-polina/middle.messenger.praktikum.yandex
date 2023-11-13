@@ -22,6 +22,10 @@ export class ChatWSController {
     try {
       data = { ...data, type: 'message' };
       await ChatWS.sendWS(data);
+      await ChatWS.sendWS({
+        content: '0',
+        type: 'get old',
+      });
       await ChatsController.fetchChats();
     } catch (err) {
       console.log('Ошибка отправки сообщения: ', err);

@@ -34,9 +34,7 @@ export const tmpl = `
                {{{formDeleteUsers}}}
                {{{formAddUsers}}}
           </div>
-          {{#each oldMessages}}
-                    <span>{{content}}</span>
-          {{/each}}
+          {{{messages}}}
      </main>
      {{else}}
      <main class="${s.wrapper_noexist}">

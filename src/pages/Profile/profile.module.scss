@@ -12,10 +12,12 @@
   align-items: center;
   justify-content: center;
   border-right: 1px solid #eaeaea;
+
   & > div {
     width: 50%;
     aspect-ratio: 1/1;
   }
+
   &_link {
     border-radius: 100%;
     background-color: #3369f3;
@@ -111,6 +113,7 @@
         text-decoration: underline;
       }
     }
+
     &__link_logout {
       color: #f00 !important;
     }

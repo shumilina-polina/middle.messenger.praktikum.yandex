@@ -1,4 +1,4 @@
-import { Chat, UserData } from '@/types/apiDataTypes';
+import { Chat, OldMessage, UserData } from '@/types/apiDataTypes';
 import { EventBus } from './EventBus';
 import set from '@/utils/set';
 import Block from './Block';
@@ -7,22 +7,7 @@ enum StoreEvents {
   Update = 'update',
 }
 
-type Message = {
-  chat_id: number;
-  time: string;
-  type: string;
-  user_id: string;
-  content: string;
-  file?: {
-    id: number;
-    user_id: number;
-    path: string;
-    filename: string;
-    content_type: string;
-    content_size: number;
-    upload_date: string;
-  };
-};
+
 
 export type State = {
   user?: UserData;
@@ -30,7 +15,7 @@ export type State = {
   currentChat?: {
     elemOptions: any;
     chatUsers: Array<UserData>;
-    oldMessages?: Array<Message>;
+    oldMessages?: Array<OldMessage>;
   };
 };
 
