@@ -108,7 +108,11 @@ class Router {
   }
 
   private getRoute(pathname: string) {
-    return this.routes.find((route) => route.match(pathname));
+    console.log('pathname: ', pathname);
+    return (
+      this.routes.find((route) => route.match(pathname)) ??
+      this.routes.find((route) => route.match('/not-found'))
+    );
   }
 }
 

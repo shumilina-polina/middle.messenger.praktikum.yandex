@@ -9,6 +9,7 @@ import { AuthController } from './controller/AuthController';
 import { ProfileChangeData } from './pages/Profile/profileChangeData';
 import ProfileChangePassword from './pages/Profile/profileChangePassword';
 import { ChatsController } from './controller/ChatsController';
+import { NotFound, ServerError } from './pages/NotFound';
 
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(PAGES_ROUTES.login, Login)
@@ -16,7 +17,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(PAGES_ROUTES.chat, Chat)
     .use(PAGES_ROUTES.profile, Profile)
     .use(PAGES_ROUTES.profileChangeData, ProfileChangeData)
-    .use(PAGES_ROUTES.profileChangePassword, ProfileChangePassword);
+    .use(PAGES_ROUTES.profileChangePassword, ProfileChangePassword)
+    .use(PAGES_ROUTES.serverError, ServerError)
+    .use(PAGES_ROUTES.notFound, NotFound);
 
   let isProtectedRoute = true;
 
