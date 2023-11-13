@@ -1,0 +1,96 @@
+.chat {
+  padding: 12px 10px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #eaeaea;
+  transition: background-color 0.2s;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #e4edfd;
+  }
+
+  &:active {
+    background-color: rgb(207 216 227 / 65.2%);
+  }
+
+  & .avatar {
+    aspect-ratio: 1/1;
+    max-width: 47px;
+    width: 47px;
+    height: 47px;
+    border-radius: 100%;
+    background-color: #efefef;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+    & .content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      text-align: left;
+      gap: 10px;
+
+      & .name {
+        color: #1e1e1e;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      & .time {
+        color: #999;
+        text-align: right;
+        font-size: 9px;
+        font-weight: 500;
+      }
+    }
+
+    & .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & .message {
+        color: #999;
+        font-size: 12px;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -moz-box;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -moz-box-orient: vertical;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+
+        & > span {
+          color: #3369f3;
+        }
+      }
+
+      & .count {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background-color: #3369f3;
+        color: #fff;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 500;
+        border-radius: 100%;
+      }
+    }
+  }
+}

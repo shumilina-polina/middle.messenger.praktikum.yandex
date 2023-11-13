@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "at-rule-no-unknown": null,
+    "selector-class-pattern": ".*",
+    "property-no-unknown": null
+  },
+  "ignoreFiles": ["dist/*", "src/styles/normalize.scss"]
+}
