@@ -20,7 +20,7 @@
 - [/chat](https://lively-dieffenbachia-64cec5.netlify.app/chat) - страница с чатами
 - [/profile](https://lively-dieffenbachia-64cec5.netlify.app/profile) - личный кабинет пользователя
 - [/profile-change-data](https://lively-dieffenbachia-64cec5.netlify.app/profile-change-data) - страница изменений данных пользователя
-- [/profile-change-password](https://lively-dieffenbachia-64cec5.netlify.app/profile-change-password) - страница изменений данных пользователя
+- [/profile-change-password](https://lively-dieffenbachia-64cec5.netlify.app/profile-change-password) - страница изменений пароля пользователя
 - [/not-found](https://lively-dieffenbachia-64cec5.netlify.app/not-found) - страница 404
 - [/server-error](https://lively-dieffenbachia-64cec5.netlify.app/not-found) - страница 5\*\*
 
