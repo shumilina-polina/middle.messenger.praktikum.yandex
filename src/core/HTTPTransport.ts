@@ -1,4 +1,4 @@
-const enum METHODS {
+export const enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -8,7 +8,7 @@ const enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: Record<string, string | number | number[]> | FormData;
+  data?: Record<string, string | number | Array<string | number>> | FormData;
   timeout?: number;
 };
 
