@@ -1,0 +1,47 @@
+.content {
+  color: #1e1e1e;
+  font-size: 12px;
+  line-height: 140%;
+}
+
+.time {
+  font-size: 9px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 15px;
+  overflow: auto;
+  max-height: 100%;
+  width: 100%;
+  padding-right: 3px;
+
+  &_item {
+    max-width: 70%;
+    width: fit-content;
+    padding: 5px 11px;
+    gap: 20px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 15px;
+
+    &_admin {
+      align-self: flex-end;
+      background-color: rgb(228 237 253 / 100%);
+
+      & .time {
+        color: #3369f3;
+      }
+    }
+
+    &_user {
+      align-self: flex-start;
+      background-color: #f8f8f8;
+
+      & .time {
+        color: #999;
+      }
+    }
+  }
+}
