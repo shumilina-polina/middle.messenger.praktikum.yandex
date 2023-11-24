@@ -348,10 +348,10 @@ describe('formatTime function', () => {
   });
 
   it('should return time if date is today', () => {
-    const dateStr = '2023-11-23T13:32:31+00:00';
-    const result = formatTime(dateStr);
+    const today = new Date(Date.now());
+    const result = formatTime(`${today}`);
 
-    expect(result).to.equal('16:32');
+    expect(result).to.equal(`${today.getHours()}:${today.getMinutes()}`);
   });
 
   it('should return NaN string if cant format data', () => {
